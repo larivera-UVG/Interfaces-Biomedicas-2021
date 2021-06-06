@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Interfaz Biomédica para el Control de Sistemas Robóticos Utilizando Señales EMG y EEG
 Este proyecto tiene el objetivo de desarrollar una interfaz biomédica para el control de dipositivos robóticos. Las señales tienen que poder ser adquiridas, filtradas y análisadas en tiempo real, para poder convertirlas en comandos y enviarlos a los sistemas robóticos. Las señales a utilizar son tanto las EMG como las EEG, pudiendo así combinarlas para poder tener un mejor control sobre los sistemas robóticos.
 
@@ -22,6 +22,3 @@ Este proyecto tiene el objetivo de desarrollar una interfaz biomédica para el c
 ##2.1 Códigos
 ##2.2 Documentos
 ##2.3 Ejemplos
-=======
-Folder para el trabajo de tesis de Roberto Cáceres.
->>>>>>> parent of 6d6986c (PruebasConBaseDeDatos)
