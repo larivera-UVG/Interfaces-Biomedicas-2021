@@ -30,7 +30,7 @@ filelist = {datedir.name};
 ival=[0 3001];
 
 %% Performance measurement
-for i = 1:length(filelist)
+for i = 1:2
     filelist{i}
     [cnt,mrk,mnt]=eegfile_loadMatlab([dd filelist{i}]);
     
