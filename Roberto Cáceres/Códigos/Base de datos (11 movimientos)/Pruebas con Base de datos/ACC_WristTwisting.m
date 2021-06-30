@@ -19,8 +19,10 @@ clc; close all; clear all;
 %%
 % Directory
 % Write down where converted data file downloaded (file directory)
-dd='C:\Users\barss\OneDrive\Desktop\EMG_AllSesions_AllSub_twist\'; 
-cd 'C:\Users\barss\OneDrive\Desktop\EMG_AllSesions_AllSub_twist';
+
+
+dd='C:\Users\barss\OneDrive\Desktop\EEG_Sesion1_Twist\'; 
+cd 'C:\Users\barss\OneDrive\Desktop\EEG_Sesion1_Twist';
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
 datedir = dir('*.mat');
@@ -30,9 +32,9 @@ filelist = {datedir.name};
 ival=[0 3001];
 
 %% Performance measurement
-for i = 1:2
+for i = 1:1
     filelist{i}
-    [cnt,mrk,mnt]=eegfile_loadMatlab([dd filelist{i}]);
+    [cnt,mrk,mnt]=eegfile_loadMatlab([dd filelist{1}]);
     
     % Band pass filtering, order of 4, range of [8-30] Hz (mu-, beta-bands)
     filterBank = {[8 30]};
@@ -99,11 +101,75 @@ for i = 1:2
     
 end
 
-A = num2cell(maxPerformance);
-subPerformance = cat(1, filelist, A);
+%% Primera Prueba con WristTwisting 
 
-% Save results of FBCSP with RLDA in excel file
-% total results: 9 bands of accuracies
-filename = 'Performance_reaching_ME.xlsx';
-writecell((subPerformance)', filename, 'Sheet', 1);
+data = cell(2,8);
+
+data{1,1}='ZC1';
+data{1,2}='ZC2';
+data{1,3}='MAV1';
+data{1,4}='MAV2';
+data{1,5}='VAR1';
+data{1,6}='VAR2';
+data{1,7}='KURTO1';
+data{1,8}='KURTO2';
+
+[nTimes,nChan,nTrials] = size(concatEpo.x)
+
+    
+    eti1 = [];
+    XtestZC1 = [];
+    XtestMAV1 = [];   
+    XtestVAR1 = [];
+    XtestKUR1 = [];
+            
+    eti2 = [];
+    XtestZC2 = [];
+    XtestMAV2 = []; 
+    XtestVAR2 = [];
+     XtestKUR2 = [];
+for j = 1:nTrials
+            
+    
+            varian(j) = var(concatEpo.x(:,1,j));
+             [zc(j),mav(j)]=metricas(concatEpo.x(:,1,j),0,0);  
+             curtos(j) = kurtosis(concatEpo.x(:,1,j));
+         
+          
+           %Izquierda
+               if concatEpo.y(1,j) == 1
+                   XtestZC1 = [XtestZC1;zc(i)];
+                   XtestVAR1 = [XtestVAR1;varian(j)];
+                   XtestMAV1 = [XtestMAV1;mav(j)];
+                   XtestKUR1 = [XtestKUR1;curtos(j)];
+               end 
+               %Derecha
+                  if concatEpo.y(2,j) == 1
+                   XtestZC2 = [XtestZC2;zc(j)];
+                   XtestMAV2 = [XtestMAV2;mav(j)]; 
+                   XtestVAR2 = [XtestVAR2;varian(j)];
+                   XtestKUR2 = [XtestKUR2;curtos(j)];
+               end 
+%         
+% 
+end
+ 
+etiqueta = concatEpo.y
+
+data{2,1}=XtestZC1;
+data{2,2}=XtestZC2;
+data{2,3}=XtestMAV1;
+data{2,4}=XtestMAV2;
+data{2,5}=XtestVAR1;
+data{2,6}=XtestVAR2;
+data{2,7}=XtestKUR1;
+data{2,8}=XtestKUR2;
+% dat = permute(concatEpo.x,[2 1 3]);
+%  dat = mean(dat,2);
+%  l22=concatEpo.x(:,5,100)
+%  k1 = kurtosis(concatEpo.x(:,1,150));
+%  v1=var(dat);
+%  
+%  [zc,mav]=metricas(dat(:,:,150),0,0);  
+
 
