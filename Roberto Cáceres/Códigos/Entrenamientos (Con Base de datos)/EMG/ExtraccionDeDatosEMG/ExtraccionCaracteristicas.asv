@@ -20,21 +20,52 @@ clc; close all; clear all;
 % Directory
 % Write down where converted data file downloaded (file directory)
 
+%Cada uno de los tipos de movimiento que tiene esta base de datos, tiene su propio  script para poder obtener los datos directamente de las estrucutras que 
+% ellos hicieron, teniendo así acceso a cada uno de los datos importantes para poder realizar los entrenamientos
 
-dd='C:\Users\barss\OneDrive\Desktop\EEG_Sesion1_Twist\'; 
-cd 'C:\Users\barss\OneDrive\Desktop\EEG_Sesion1_Twist';
+
+dd='C:\Users\barss\OneDrive\Desktop\SeñalesEMG\'; %% le damos una direccion para ir a buscar los datos 
+cd 'C:\Users\barss\OneDrive\Desktop\SeñalesEMG'; 
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
-datedir = dir('*.mat');
-filelist = {datedir.name};
+datedir = dir('*.mat'); %% le dice que tipo de dato tiene que buscar en la dirección
+filelist = {datedir.name}; %%vuelve los archivos de ese tipo en esa direccion una lista para poder recorrerla 
 
 % Setting time duration: interval 0~3 s
-ival=[0 3001];
+ival=[0 3001]; %para poder filtrar luego
+
+DatosEMG = cell(2,10);
+
+DatosEMG{1,1}='ZC1';
+DatosEMG{1,2}='ZC2';
+DatosEMG{1,3}='MAV1';
+DatosEMG{1,4}='MAV2';
+DatosEMG{1,5}='RMS1';
+DatosEMG{1,6}='RMS2';
+DatosEMG{1,7}='Varianza1';
+DatosEMG{1,8}='Varianza2';
+DatosEMG{1,9}='WaveForm1';
+DatosEMG{1,10}='WaveForm2';
+
+    
+    eti1 = [];
+    XtestZC1 = [];
+    XtestMAV1 = [];   
+    XtestVAR1 = [];
+    XtestRMS1 = [];
+    XtestWaveF1=[];
+            
+    eti2 = [];
+    XtestZC2 = [];
+    XtestMAV2 = []; 
+    XtestVAR2 = [];
+     XtestRMS2 = [];
+     XtestWaveF2=[];
 
 %% Performance measurement
-for i = 1:1
+for i = 1:3
     filelist{i}
-    [cnt,mrk,mnt]=eegfile_loadMatlab([dd filelist{1}]);
+    [cnt,mrk,mnt]=eegfile_loadMatlab([dd filelist{1}]); %extraemos estos datos (Se puede encontrar que significa cada uno en los readme de la base de datos)
     
     % Band pass filtering, order of 4, range of [8-30] Hz (mu-, beta-bands)
     filterBank = {[8 30]};
@@ -47,8 +78,8 @@ for i = 1:1
         
         % Select channels
        %% epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4','EMG_5','EMG_6','EMG_ref'});
-        epo = proc_selectChannels(epo, {'Fp1'});
-        classes=size(epo.className,2);
+        epo = proc_selectChannels(epo, {'EMG_1'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
+        classes=size(epo.className,2); % obtiene las clases que traen las señales
         
         trial=50;
         
@@ -79,61 +110,17 @@ for i = 1:1
             end
         end
         
-        %% CSP - FEATURE EXTRACTION
-        [csp_fv,csp_w,csp_eig]=proc_multicsp(concatEpo,3);
-        proc=struct('memo','csp_w');
-        
-        proc.train= ['[fv,csp_w]=  proc_multicsp(fv, 3); ' ...
-            'fv= proc_variance(fv); ' ...
-            'fv= proc_logarithm(fv);'];
-        
-        proc.apply= ['fv= proc_linearDerivation(fv, csp_w); ','fv= proc_variance(fv); ' ,'fv= proc_logarithm(fv);'];
-        
-        
-        %% RLDA - CLASSIFICATION WITH 10-FOLD CROSS-VALIDATION       
-        [C_eeg, loss_eeg_std, out_eeg.out, memo] = xvalidation(concatEpo,'RLDAshrink','proc',proc, 'kfold', 10);
-        Result(filt)= 1-C_eeg;
-        Result_Std(filt)=loss_eeg_std;
-        All_csp_w(:,:,filt)=csp_w;
-    end   
-    % Maximum classification performance of each subject
-    maxPerformance(i) = max(Result);
-    
-end
+        %%
+        [nTimes,nChan,nTrials] = size(concatEpo.x)
 
-%% Primera Prueba con WristTwisting 
 
-data2 = cell(2,8);
-
-data2{1,1}='ZC1';
-data2{1,2}='ZC2';
-data2{1,3}='MAV1';
-data2{1,4}='MAV2';
-data2{1,5}='VAR1';
-data2{1,6}='VAR2';
-data2{1,7}='KURTO1';
-data2{1,8}='KURTO2';
-
-[nTimes,nChan,nTrials] = size(concatEpo.x)
-
-    
-    eti1 = [];
-    XtestZC1 = [];
-    XtestMAV1 = [];   
-    XtestVAR1 = [];
-    XtestKUR1 = [];
-            
-    eti2 = [];
-    XtestZC2 = [];
-    XtestMAV2 = []; 
-    XtestVAR2 = [];
-     XtestKUR2 = [];
 for j = 1:nTrials
             
     
             varian(j) = var(concatEpo.x(:,1,j));
              [zc(j), mav(j)]=metricas(concatEpo.x(:,1,j),0,0);  
-             curtos(j) = kurtosis(concatEpo.x(:,1,j));
+             rmslevel(j) = rms(concatEpo.x(:,1,j));
+             WF(j) = jWaveformLength(concatEpo.x(:,1,j))
          
           
            %Izquierda
@@ -141,14 +128,16 @@ for j = 1:nTrials
                    XtestZC1 = [XtestZC1;zc(j)];
                    XtestVAR1 = [XtestVAR1;varian(j)];
                    XtestMAV1 = [XtestMAV1;mav(j)];
-                   XtestKUR1 = [XtestKUR1;curtos(j)];
+                   XtestRMS1 = [XtestRMS1;rmslevel(j)];
+                   XtestWaveF1 = [XtestWaveF1;WF(j)];
                end 
                %Derecha
                   if concatEpo.y(2,j) == 1
                    XtestZC2 = [XtestZC2;zc(j)];
                    XtestMAV2 = [XtestMAV2;mav(j)]; 
                    XtestVAR2 = [XtestVAR2;varian(j)];
-                   XtestKUR2 = [XtestKUR2;curtos(j)];
+                   XtestRMS2 = [XtestRMS2;rmslevel(j)];
+                   XtestWaveF2 = [XtestWaveF2;WF(j)];
                end 
 %         
 % 
@@ -156,14 +145,32 @@ end
  
 etiqueta2 = concatEpo.y
 
-data2{2,1}=XtestZC1;
-data2{2,2}=XtestZC2;
-data2{2,3}=XtestMAV1;
-data2{2,4}=XtestMAV2;
-data2{2,5}=XtestVAR1;
-data2{2,6}=XtestVAR2;
-data2{2,7}=XtestKUR1;
-data2{2,8}=XtestKUR2;
+DatosEMG{2,1}=  XtestZC1;
+DatosEMG{2,2}=  XtestZC2;
+DatosEMG{2,3}=  XtestMAV1;
+DatosEMG{2,4}=  XtestMAV2;
+DatosEMG{2,5}=  XtestRMS1;
+DatosEMG{2,6}=  XtestRMS2;
+DatosEMG{2,7}=  XtestVAR1;
+DatosEMG{2,8}=  XtestVAR2;
+DatosEMG{2,9}=  XtestWaveF1;
+DatosEMG{2,10}=XtestWaveF2;
+
+
+   
+    end   
+
+    
+end
+
+%% Extraccion de caracteristicas 
+
+% Este codigo sirve para poder obtener las caracteristicas de cada una de las señales de las 3 diferentes sesiones y poder organizarla 
+%para poder obtener los datos y así realizar los entrenamientos. 
+
+
+
+
 % dat = permute(concatEpo.x,[2 1 3]);
 %  dat = mean(dat,2);
 %  l22=concatEpo.x(:,5,100)
