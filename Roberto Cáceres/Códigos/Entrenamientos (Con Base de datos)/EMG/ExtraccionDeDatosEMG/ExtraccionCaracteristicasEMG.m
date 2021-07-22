@@ -48,12 +48,14 @@ DatosEMG{1,9}='WaveForm1';
 DatosEMG{1,10}='WaveForm2';
 DatosEMG{1,11}='WilsonA1';
 DatosEMG{1,12}='WilsonA2';
-DatosEMG{1,13}='CoefVarLog1';
-DatosEMG{1,14}='CoefVarLog2';
+DatosEMG{1,13}='AverageEnergy1';
+DatosEMG{1,14}='AverageEnergy2';
 DatosEMG{1,15}=' skewness1';
 DatosEMG{1,16}=' skewness2';
 DatosEMG{1,17}='IntegratedEMG1 ';
 DatosEMG{1,18}='IntegratedEMG2';
+DatosEMG{1,19}='MeanAbsolute1 ';
+DatosEMG{1,20}='MeanAbsolute2';
 
 
 
@@ -65,9 +67,10 @@ DatosEMG{1,18}='IntegratedEMG2';
     XtestRMS1 = [];
     XtestWaveF1=[];
     XtestWilsonA1=[];
-    XtestCoefVarLog1=[];
+    XtestAverageEnergy1=[];
      Xtestskewness1=[];
      XtestIntegratedEMG1=[];
+     XtestMeanAbsoluteValue1=[];
             
     eti2 = [];
     XtestZC2 = [];
@@ -76,9 +79,10 @@ DatosEMG{1,18}='IntegratedEMG2';
     XtestRMS2 = [];
     XtestWaveF2=[];
     XtestWilsonA2=[];
-    XtestCoefVarLog2=[];
+    XtestAverageEnergy2=[];
     Xtestskewness2=[];
     XtestIntegratedEMG2=[];
+     XtestMeanAbsoluteValue2=[];
 
 %% Performance measurement
 for i = 1:3
@@ -144,9 +148,10 @@ for j = 1:nTrials
              rmslevel(j)        =     rms(concatEpo.x(:,1,j));
              WF(j)                 =     jWaveformLength(concatEpo.x(:,1,j));
              Wilson(j)          =     jWillisonAmplitude(concatEpo.x(:,1,j),0.1);
-             LCOV(j)            =     jLogCoefficientOfVariation(concatEpo.x(:,1,j));
+             LCOV(j)            =     jAverageEnergy(concatEpo.x(:,1,j));
              SKEW(j)           =      jSkewness(concatEpo.x(:,1,j));
              IntEMG(j)            =    jIntegratedEMG(concatEpo.x(:,1,j));
+             MeanAbs(j)    = jMeanAbsoluteValue(concatEpo.x(:,1,j));
            %Izquierda
                if concatEpo.y(1,j) == 1
                    XtestZC1 = [XtestZC1;zc(j)];
@@ -155,9 +160,10 @@ for j = 1:nTrials
                    XtestRMS1 = [XtestRMS1;rmslevel(j)];
                    XtestWaveF1 = [XtestWaveF1;WF(j)];
                     XtestWilsonA1 = [XtestWilsonA1;Wilson(j)];
-                    XtestCoefVarLog1 = [ XtestCoefVarLog1;LCOV(j)];
+                    XtestAverageEnergy1 = [ XtestAverageEnergy1;LCOV(j)];
                     Xtestskewness1=[ Xtestskewness1; SKEW(j)];
                      XtestIntegratedEMG1 = [XtestIntegratedEMG1;  IntEMG(j)];
+                     XtestMeanAbsoluteValue1 =  [XtestMeanAbsoluteValue1;     MeanAbs(j)];
                end 
                %Derecha
                   if concatEpo.y(2,j) == 1
@@ -167,9 +173,10 @@ for j = 1:nTrials
                    XtestRMS2 = [XtestRMS2;rmslevel(j)];
                    XtestWaveF2 = [XtestWaveF2;WF(j)];
                    XtestWilsonA2 = [XtestWilsonA2 ; Wilson(j)];
-                   XtestCoefVarLog2 = [ XtestCoefVarLog2;LCOV(j)];
+                   XtestAverageEnergy2 = [ XtestAverageEnergy2;LCOV(j)];
                    Xtestskewness2= [ Xtestskewness2; SKEW(j)];
                    XtestIntegratedEMG2 = [XtestIntegratedEMG2;  IntEMG(j)];
+                     XtestMeanAbsoluteValue2 =  [XtestMeanAbsoluteValue2;     MeanAbs(j)];
                end 
 %         
 % 
@@ -189,12 +196,14 @@ DatosEMG{2,9}=  XtestWaveF1;
 DatosEMG{2,10}=XtestWaveF2;
 DatosEMG{2,11}=  XtestWilsonA1;
 DatosEMG{2,12}=XtestWilsonA2;
-DatosEMG{2,13}=  XtestCoefVarLog1;
-DatosEMG{2,14}=XtestCoefVarLog2;
+DatosEMG{2,13}=  XtestAverageEnergy1;
+DatosEMG{2,14}=XtestAverageEnergy2;
 DatosEMG{2,15}=    Xtestskewness1;
 DatosEMG{2,16}=   Xtestskewness2;
 DatosEMG{2,17}=   XtestIntegratedEMG1;
 DatosEMG{2,18}=  XtestIntegratedEMG2;
+DatosEMG{2,19}=      XtestMeanAbsoluteValue1;
+DatosEMG{2,20}=     XtestMeanAbsoluteValue2;
 
 
 

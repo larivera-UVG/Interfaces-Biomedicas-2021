@@ -6,21 +6,32 @@
 %% Neural network
 % 5 caracteristiscas 
 %en este script y en esta seccion se estaran probando distintos tipos de entrenamiento con los datos proporcionados por la base de datos encontrada
-%
+%% Zero Crossing, MAV,  RMS, VARIANZA, Wav,  WilsonAmplitude, AverageEnergy, Skewness, IntegratedEMG, MeanAbsoluteValue
 
-%% Zero Crossing, MAV, WAVELET, RMS, VARIANZA
+X_input = [DatosEMG{2,1}, DatosEMG{2,3},DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11},DatosEMG{2,13},DatosEMG{2,15},DatosEMG{2,17},DatosEMG{2,19}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12},DatosEMG{2,14},DatosEMG{2,16},DatosEMG{2,18},DatosEMG{2,20}]';
 
-%X_input = [DatosEMG{2,1}, DatosEMG{2,3},DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10}]';
-%%  MAV, WAVELET, RMS, VARIANZA
+% 84% obtenido de resultado de validacion hasta 89%
 
-%X_input = [ DatosEMG{2,3},DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9}; DatosEMG{2,4},DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10}]';
-%%  RMS, WAVELET,  Varianza
 
-%X_input = [ DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9}; DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10}]';
+%% Zero Crossing, MAV,  RMS, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG, MeanAbsoluteValue
+%X_input = [DatosEMG{2,1}, DatosEMG{2,3},DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11},DatosEMG{2,15},DatosEMG{2,17},DatosEMG{2,19}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12},DatosEMG{2,16},DatosEMG{2,18},DatosEMG{2,20}]';
+
+% 89% obtenido de resultado de validacion
+
+%% Zero Crossing, MAV,  RMS, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
+%X_input = [DatosEMG{2,1}, DatosEMG{2,3},DatosEMG{2,5}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11},DatosEMG{2,15},DatosEMG{2,17}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,6},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12},DatosEMG{2,16},DatosEMG{2,18}]';
+
+% 83 % obtenido de resultado de validacion
+
+%% Zero Crossing, MAV, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
+%X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11},DatosEMG{2,15},DatosEMG{2,17}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12},DatosEMG{2,16},DatosEMG{2,18}]';
+
 %%  RMS, WAVELET 
 
 %X_input = [ DatosEMG{2,5}, DatosEMG{2,7}; DatosEMG{2,6},DatosEMG{2,8}]';
  
+
+
 Xtarget = [ones(length(DatosEMG{2,1}),1),zeros(length(DatosEMG{2,1}),1);
            zeros(length(DatosEMG{2,2}),1),ones(length(DatosEMG{2,2}),1)]';
     

@@ -5,9 +5,9 @@
 %con las 4 caracteristicas.
 
 %% SVM
-for ii=1:length(data{2,2})
-   if (data{2,2}(ii) == 2) 
-       data{2,2}(ii) = 0;
+for ii=1:length(DatosEMG{2,2})
+   if (DatosEMG{2,2}(ii) == 2) 
+       DatosEMG{2,2}(ii) = 0;
    end
 end
 
@@ -35,22 +35,22 @@ end
 %Todas juntas
 %X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:),data2{2,1}(1:30,:),data2{2,3}(1:30,:),data2{2,5}(1:30,:),data2{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:),data2{2,2}(1:30,:),data2{2,4}(1:30,:),data2{2,6}(1:30,:),data2{2,8}(1:30,:)];
 % X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:)];       
-X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:);data2{2,1}(1:30,:),data2{2,3}(1:30,:),data2{2,5}(1:30,:),data2{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:);data2{2,2}(1:30,:),data2{2,4}(1:30,:),data2{2,6}(1:30,:),data2{2,8}(1:30,:)];
+X_train = [ DatosEMG{2,3}(1:105,:),DatosEMG{2,5}(1:105,:), DatosEMG{2,7}(1:105,:), DatosEMG{2,9}(1:105,:),DatosEMG{2,11}(1:105,:),DatosEMG{2,13}(1:105,:),DatosEMG{2,15}(1:105,:); DatosEMG{2,4}(1:105,:),DatosEMG{2,6}(1:105,:),DatosEMG{2,8}(1:105,:),DatosEMG{2,10}(1:105,:),DatosEMG{2,12}(1:105,:),DatosEMG{2,14}(1:105,:),DatosEMG{2,16}(1:105,:)];
 
 %Xtarget = [ones(length(data{2,1}(1:30,:)),1);  2*ones(length(data{2,2}(1:30,:)),1)];
 
-Xtarget = [ones(length(data{2,1}(1:30,:)),1);  2*ones(length(data{2,2}(1:30,:)),1);  3*ones(length(data{2,2}(1:30,:)),1);  4*ones(length(data{2,2}(1:30,:)),1)];
+Xtarget = [ones(length(DatosEMG{2,1}(1:105,:)),1);  2*ones(length(DatosEMG{2,2}(1:105,:)),1)];
 
 Y= Xtarget ;
 
-X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:);data2{2,1}(31:50,:),data2{2,3}(31:50,:),data2{2,5}(31:50,:),data2{2,7}(31:50,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:);data2{2,2}(31:50,:),data2{2,4}(31:50,:),data2{2,6}(31:50,:),data2{2,8}(31:50,:)];
+X_test = [ DatosEMG{2,3}(106:end,:),DatosEMG{2,5}(106:end,:), DatosEMG{2,7}(106:end,:), DatosEMG{2,9}(106:end,:),DatosEMG{2,11}(106:end,:),DatosEMG{2,13}(106:end,:),DatosEMG{2,15}(106:end,:); DatosEMG{2,4}(106:end,:),DatosEMG{2,6}(106:end,:),DatosEMG{2,8}(106:end,:),DatosEMG{2,10}(106:end,:),DatosEMG{2,12}(106:end,:),DatosEMG{2,14}(106:end,:),DatosEMG{2,16}(106:end,:)];
 
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:),data2{2,1}(31:50,:),data2{2,3}(31:50,:),data2{2,5}(31:50,:),data2{2,7}(31:50,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:),data2{2,2}(31:50,:),data2{2,4}(31:50,:),data2{2,6}(31:50,:),data2{2,8}(31:50,:)];
  
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:)];      
  %--------------------------------------       
 %Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),1)];
-Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),1);  3*ones(length(data{2,2}(31:end,:)),1);  4*ones(length(data{2,2}(31:end,:)),1)];
+Ysol= [ones(length(DatosEMG{2,1}(106:end,:)),1) ;  2*ones(length(DatosEMG{2,2}(106:end,:)),1)];
         
 %figure(7); clf;
 %gscatter(X_train,Y);
@@ -58,45 +58,42 @@ Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),
 %title('Muestras de Entrenamiento');
 
 %% Crear celdas y vectores para guardar modelos y otras cosas
-ModeloSVM = cell(1,6);
-ModeloVC = cell(1,6);
-errorVC = zeros(1,6);
-asignado = cell(1,6);
-valores = cell(1,6);
-titulos = {'Kernel Lineal','Kernel Polinomial Grado 2','Kernel Polinomial Grado 3',...
-           'Kernel Polinomial Grado 4','Kernel Gaussiano, Muestras No Estandarizadas',...
+ModeloSVM = cell(1,4);
+ModeloVC = cell(1,4);
+errorVC = zeros(1,4);
+asignado = cell(1,4);
+valores = cell(1,4);
+titulos = {'Kernel Lineal','Kernel Polinomial Grado 2','Kernel Gaussiano, Muestras No Estandarizadas',...
            'Kernel Gaussiano, Muestras Estandarizadas'};
-%% Entrenamiento, variando Kernels y ciertos parámetros
-%ModeloSVM{1} = fitcsvm(X_train,Y,'KernelFunction','linear','KernelScale','auto');
-ModeloSVM{1} = fitcecoc(X_train,Y);
-%ModeloSVM{2} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',2);
-%ModeloSVM{3} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',3);
-%ModeloSVM{4} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',4);
-%ModeloSVM{5} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto');
-%ModeloSVM{6} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto','Standardize',true);
+%% Entrenamiento, variando Kernels y ciertos parï¿½metros
+ModeloSVM{1} = fitcsvm(X_train,Y,'KernelFunction','linear','KernelScale','auto');
+%ModeloSVM{1} = fitcecoc(X_train,Y);
+ModeloSVM{2} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',2);
+ModeloSVM{3} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto');
+ModeloSVM{4} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto','Standardize',true);
 
-% Se hace validación cruzada con las muestras de entrenamiento, se calcula el error
-% de clasificación de la validación cruzada, se clasifican las muestras de prueba,
+% Se hace validaciï¿½n cruzada con las muestras de entrenamiento, se calcula el error
+% de clasificaciï¿½n de la validaciï¿½n cruzada, se clasifican las muestras de prueba,
 % y se grafican resultados. Todo lo anterior para los 6 modelos de arriba.
 [fil,col] = size(ModeloSVM);
 for k = 1:col
-    % Validación cruzada, clasificación errónea
+    % Validaciï¿½n cruzada, clasificaciï¿½n errï¿½nea
     ModeloVC{k} = crossval(ModeloSVM{k});
     errorVC(k) = kfoldLoss(ModeloVC{k});
     
-    % Clasificación de las muestras de prueba
-    [asignado{2},valores{2}] = predict(ModeloSVM{1},X_test); % etiquetas asignadas, valores
+    % Clasificaciï¿½n de las muestras de prueba
+    [asignado{k},valores{k}] = predict(ModeloSVM{k},X_test); % etiquetas asignadas, valores
     
-    % Gráficas
+    % Grï¿½ficas
     figure(k); clf;
     subplot(1,2,1);
     gscatter(X_train(:,1),X_train(:,2),Y); hold on;
     % Vectores de soporte
     plot(X_train(ModeloSVM{k}.IsSupportVector,1),X_train(ModeloSVM{k}.IsSupportVector,2),'ko','MarkerSize',10);
-    % Frontera de decisión
+    % Frontera de decisiï¿½n
    % contour(x1Grid,x2Grid,reshape(valores{k}(:,2),size(x1Grid)),[0 0],'k');
     grid on;
-    title('Muestras de Entrenamiento y Frontera de Decisión')
+    title('Muestras de Entrenamiento y Frontera de Decision')
     legend({'1','2','Support Vectors'},'Location','Best');
     
     subplot(1,2,2);
@@ -104,13 +101,20 @@ for k = 1:col
     legend({'1','2'},'Location','Best');
     grid on;
     title('Muestras de Prueba');
-    %sgtitle(sprintf('%s.    Error en la Validación Cruzada: %.2f%%',titulos{k},100*errorVC(k)));
+    %sgtitle(sprintf('%s.    Error en la Validaciï¿½n Cruzada: %.2f%%',titulos{k},100*errorVC(k)));
     
 end
-NYsol = full(ind2vec(Ysol',4));
-NAsig = full(ind2vec(asignado{1,2}',4))
+NYsol = full(ind2vec(Ysol',2));
+NAsig1 = full(ind2vec(asignado{1,1}',2))
+NAsig2 = full(ind2vec(asignado{1,2}',2))
+NAsig3 = full(ind2vec(asignado{1,3}',2))
+NAsig4 = full(ind2vec(asignado{1,4}',2))
 %confusionmat
 %crosstab
 %confusionmat(Ysol,asignado{1,1});
 figure(9); clf;
-plotconfusion(NYsol,NAsig);
+
+plotconfusion(NYsol,NAsig1);
+plotconfusion(NYsol,NAsig2);
+plotconfusion(NYsol,NAsig3);
+plotconfusion(NYsol,NAsig4);
