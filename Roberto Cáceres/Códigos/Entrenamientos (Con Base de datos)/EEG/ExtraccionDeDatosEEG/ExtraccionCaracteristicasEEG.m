@@ -1,6 +1,4 @@
 % -------------------------------------------------------------------------
-%Roberto Caceres - 17163
-%2021
 % ACC_WistTwisting.m
 % This source code is about to measure the classification accuracy based on the basic machine learning method.
 % This classification accuracy was computed by usign the fundamental EEG signal processing such band-pass filtering, time epoch, feature extraction, classification.
@@ -26,8 +24,8 @@ clc; close all; clear all;
 % ellos hicieron, teniendo así acceso a cada uno de los datos importantes para poder realizar los entrenamientos
 
 
-dd='C:\Users\barss\OneDrive\Desktop\SeñalesEMG\'; %% le damos una direccion para ir a buscar los datos 
-cd 'C:\Users\barss\OneDrive\Desktop\SeñalesEMG'; 
+dd='C:\Users\barss\OneDrive\Desktop\SeñalesEEG\'; %% le damos una direccion para ir a buscar los datos 
+cd 'C:\Users\barss\OneDrive\Desktop\SeñalesEEG'; 
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
 datedir = dir('*.mat'); %% le dice que tipo de dato tiene que buscar en la dirección
@@ -36,28 +34,28 @@ filelist = {datedir.name}; %%vuelve los archivos de ese tipo en esa direccion un
 % Setting time duration: interval 0~3 s
 ival=[0 3001]; %para poder filtrar luego
 
-DatosEMG = cell(2,10);
+DatosEEG = cell(2,10);
 
-DatosEMG{1,1}='ZC1';
-DatosEMG{1,2}='ZC2';
-DatosEMG{1,3}='MAV1';
-DatosEMG{1,4}='MAV2';
-DatosEMG{1,5}='RMS1';
-DatosEMG{1,6}='RMS2';
-DatosEMG{1,7}='Varianza1';
-DatosEMG{1,8}='Varianza2';
-DatosEMG{1,9}='WaveForm1';
-DatosEMG{1,10}='WaveForm2';
-DatosEMG{1,11}='WilsonA1';
-DatosEMG{1,12}='WilsonA2';
-DatosEMG{1,13}='AverageEnergy1';
-DatosEMG{1,14}='AverageEnergy2';
-DatosEMG{1,15}=' skewness1';
-DatosEMG{1,16}=' skewness2';
-DatosEMG{1,17}='IntegratedEMG1 ';
-DatosEMG{1,18}='IntegratedEMG2';
-DatosEMG{1,19}='MeanAbsolute1 ';
-DatosEMG{1,20}='MeanAbsolute2';
+DatosEEG{1,1}='ZC1';
+DatosEEG{1,2}='ZC2';
+DatosEEG{1,3}='MAV1';
+DatosEEG{1,4}='MAV2';
+DatosEEG{1,5}='RMS1';
+DatosEEG{1,6}='RMS2';
+DatosEEG{1,7}='Varianza1';
+DatosEEG{1,8}='Varianza2';
+DatosEEG{1,9}='WaveForm1';
+DatosEEG{1,10}='WaveForm2';
+DatosEEG{1,11}='WilsonA1';
+DatosEEG{1,12}='WilsonA2';
+DatosEEG{1,13}='ShannonEntropy1';
+DatosEEG{1,14}='ShannonEntropy2';
+DatosEEG{1,15}=' skewness1';
+DatosEEG{1,16}=' skewness2';
+DatosEEG{1,17}='LogEnergyEntropy1 ';
+DatosEEG{1,18}='LogEnergyEntropy2';
+DatosEEG{1,19}='MeanAbsolute1 ';
+DatosEEG{1,20}='MeanAbsolute2';
 
 
 
@@ -69,9 +67,9 @@ DatosEMG{1,20}='MeanAbsolute2';
     XtestRMS1 = [];
     XtestWaveF1=[];
     XtestWilsonA1=[];
-    XtestAverageEnergy1=[];
+    XtestShannonEntropy1=[];
      Xtestskewness1=[];
-     XtestIntegratedEMG1=[];
+     XtestLogEnergyEntropy1=[];
      XtestMeanAbsoluteValue1=[];
             
     eti2 = [];
@@ -81,9 +79,9 @@ DatosEMG{1,20}='MeanAbsolute2';
     XtestRMS2 = [];
     XtestWaveF2=[];
     XtestWilsonA2=[];
-    XtestAverageEnergy2=[];
+    XtestShannonEntropy2=[];
     Xtestskewness2=[];
-    XtestIntegratedEMG2=[];
+    XtestLogEnergyEntropy2=[];
      XtestMeanAbsoluteValue2=[];
 
 %% Performance measurement
@@ -102,9 +100,9 @@ for i = 1:3
         
         % Select channels
        %% epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4','EMG_5','EMG_6','EMG_ref'});
-        epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
+        epo = proc_selectChannels(epo, {'F3','AF3'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
         classes=size(epo.className,2); % obtiene las clases que traen las señales
-        
+        %'AF3','F4','AF4'
         trial=50;
         
         % Set the number of rest trial to the same as the number of other classes trial.
@@ -140,53 +138,45 @@ for i = 1:3
          %para poder obtener los datos y así realizar los entrenamientos. 
 
         [nTimes,nChan,nTrials] = size(concatEpo.x)
-
 for p = 1:nChan
 for j = 1:nTrials
             
     
-             varian(j)              =     var(concatEpo.x(:,1,j));
-             [zc(j), mav(j)]   =     metricas(concatEpo.x(:,1,j),0,0);  
-             rmslevel(j)        =     rms(concatEpo.x(:,1,j));
-             WF(j)                 =     jWaveformLength(concatEpo.x(:,1,j));
-             Wilson(j)          =     jWillisonAmplitude(concatEpo.x(:,1,j),0.1);
-             LCOV(j)            =     jAverageEnergy(concatEpo.x(:,1,j));
-             SKEW(j)           =      jSkewness(concatEpo.x(:,1,j));
-             IntEMG(j)            =    jIntegratedEMG(concatEpo.x(:,1,j));
-             MeanAbs(j)    = jMeanAbsoluteValue(concatEpo.x(:,1,j));
-             
+            varian(j)              =     var(concatEpo.x(:,p,j));
+             [zc(j), mav(j)]   =     metricas(concatEpo.x(:,p,j),0,0);  
+             rmslevel(j)        =     rms(concatEpo.x(:,p,j));
+             WF(j)                 =     jWaveformLength(concatEpo.x(:,p,j));
+             Wilson(j)          =     jWillisonAmplitude(concatEpo.x(:,p,j),0.1);
+             Shanon(j)            =     jShannonEntropy(concatEpo.x(:,p,j));
+             SKEW(j)           =      jSkewness(concatEpo.x(:,p,j));
+             Entropy(j)            =    jLogEnergyEntropy(concatEpo.x(:,p,j));
+             MeanAbs(j)    = jMeanAbsoluteValue(concatEpo.x(:,p,j));
            %Izquierda
-           %if concatEpo.x(:,p,:) ==3
-               if (concatEpo.y(1,j) == 1) 
-           
+               if concatEpo.y(1,j) == 1
                    XtestZC1 = [XtestZC1;zc(j)];
                    XtestVAR1 = [XtestVAR1;varian(j)];
                    XtestMAV1 = [XtestMAV1;mav(j)];
                    XtestRMS1 = [XtestRMS1;rmslevel(j)];
                    XtestWaveF1 = [XtestWaveF1;WF(j)];
                     XtestWilsonA1 = [XtestWilsonA1;Wilson(j)];
-                    XtestAverageEnergy1 = [ XtestAverageEnergy1;LCOV(j)];
+                    XtestShannonEntropy1 = [ XtestShannonEntropy1;Shanon(j)];
                     Xtestskewness1=[ Xtestskewness1; SKEW(j)];
-                     XtestIntegratedEMG1 = [XtestIntegratedEMG1;  IntEMG(j)];
+                     XtestLogEnergyEntropy1 = [XtestLogEnergyEntropy1;  Entropy(j)];
                      XtestMeanAbsoluteValue1 =  [XtestMeanAbsoluteValue1;     MeanAbs(j)];
-          
                end 
                %Derecha
-                  if (concatEpo.y(2,j) == 1) 
-      
+                  if concatEpo.y(2,j) == 1
                    XtestZC2 = [XtestZC2;zc(j)];
                    XtestMAV2 = [XtestMAV2;mav(j)]; 
                    XtestVAR2 = [XtestVAR2;varian(j)];
                    XtestRMS2 = [XtestRMS2;rmslevel(j)];
                    XtestWaveF2 = [XtestWaveF2;WF(j)];
                    XtestWilsonA2 = [XtestWilsonA2 ; Wilson(j)];
-                   XtestAverageEnergy2 = [ XtestAverageEnergy2;LCOV(j)];
+                   XtestShannonEntropy2 = [ XtestShannonEntropy2;Shanon(j)];
                    Xtestskewness2= [ Xtestskewness2; SKEW(j)];
-                   XtestIntegratedEMG2 = [XtestIntegratedEMG2;  IntEMG(j)];
+                   XtestLogEnergyEntropy2 = [XtestLogEnergyEntropy2;  Entropy(j)];
                      XtestMeanAbsoluteValue2 =  [XtestMeanAbsoluteValue2;     MeanAbs(j)];
-                   
-                  end 
-          % end
+               end 
 %         
 % 
 end
@@ -194,26 +184,26 @@ end
  
 etiqueta2 = concatEpo.y
 
-DatosEMG{2,1}=  XtestZC1;
-DatosEMG{2,2}=  XtestZC2;
-DatosEMG{2,3}=  XtestMAV1;
-DatosEMG{2,4}=  XtestMAV2;
-DatosEMG{2,5}=  XtestRMS1;
-DatosEMG{2,6}=  XtestRMS2;
-DatosEMG{2,7}=  XtestVAR1;
-DatosEMG{2,8}=  XtestVAR2;
-DatosEMG{2,9}=  XtestWaveF1;
-DatosEMG{2,10}=XtestWaveF2;
-DatosEMG{2,11}=  XtestWilsonA1;
-DatosEMG{2,12}=XtestWilsonA2;
-DatosEMG{2,13}=  XtestAverageEnergy1;
-DatosEMG{2,14}=XtestAverageEnergy2;
-DatosEMG{2,15}=    Xtestskewness1;
-DatosEMG{2,16}=   Xtestskewness2;
-DatosEMG{2,17}=   XtestIntegratedEMG1;
-DatosEMG{2,18}=  XtestIntegratedEMG2;
-DatosEMG{2,19}=      XtestMeanAbsoluteValue1; 
-DatosEMG{2,20}=     XtestMeanAbsoluteValue2;
+DatosEEG{2,1}=  XtestZC1;
+DatosEEG{2,2}=  XtestZC2;
+DatosEEG{2,3}=  XtestMAV1;
+DatosEEG{2,4}=  XtestMAV2;
+DatosEEG{2,5}=  XtestRMS1;
+DatosEEG{2,6}=  XtestRMS2;
+DatosEEG{2,7}=  XtestVAR1;
+DatosEEG{2,8}=  XtestVAR2;
+DatosEEG{2,9}=  XtestWaveF1;
+DatosEEG{2,10}=XtestWaveF2;
+DatosEEG{2,11}=  XtestWilsonA1;
+DatosEEG{2,12}=XtestWilsonA2;
+DatosEEG{2,13}=  XtestShannonEntropy1;
+DatosEEG{2,14}=XtestShannonEntropy2;
+DatosEEG{2,15}=    Xtestskewness1;
+DatosEEG{2,16}=   Xtestskewness2;
+DatosEEG{2,17}=   XtestLogEnergyEntropy1;
+DatosEEG{2,18}=  XtestLogEnergyEntropy2;
+DatosEEG{2,19}=      XtestMeanAbsoluteValue1;
+DatosEEG{2,20}=     XtestMeanAbsoluteValue2;
 
 
 
