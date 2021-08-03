@@ -36,28 +36,50 @@ filelist = {datedir.name}; %%vuelve los archivos de ese tipo en esa direccion un
 % Setting time duration: interval 0~3 s
 ival=[0 3001]; %para poder filtrar luego
 
-DatosEMG = cell(2,10);
+DatosEMGCanal1 = cell(2,10);
+DatosEMGCanal2 = cell(2,10);
 
-DatosEMG{1,1}='ZC1';
-DatosEMG{1,2}='ZC2';
-DatosEMG{1,3}='MAV1';
-DatosEMG{1,4}='MAV2';
-DatosEMG{1,5}='RMS1';
-DatosEMG{1,6}='RMS2';
-DatosEMG{1,7}='Varianza1';
-DatosEMG{1,8}='Varianza2';
-DatosEMG{1,9}='WaveForm1';
-DatosEMG{1,10}='WaveForm2';
-DatosEMG{1,11}='WilsonA1';
-DatosEMG{1,12}='WilsonA2';
-DatosEMG{1,13}='AverageEnergy1';
-DatosEMG{1,14}='AverageEnergy2';
-DatosEMG{1,15}=' skewness1';
-DatosEMG{1,16}=' skewness2';
-DatosEMG{1,17}='IntegratedEMG1 ';
-DatosEMG{1,18}='IntegratedEMG2';
-DatosEMG{1,19}='MeanAbsolute1 ';
-DatosEMG{1,20}='MeanAbsolute2';
+DatosEMGCanal1{1,1}='ZC1';
+DatosEMGCanal1{1,2}='ZC2';
+DatosEMGCanal1{1,3}='MAV1';
+DatosEMGCanal1{1,4}='MAV2';
+DatosEMGCanal1{1,5}='RMS1';
+DatosEMGCanal1{1,6}='RMS2';
+DatosEMGCanal1{1,7}='Varianza1';
+DatosEMGCanal1{1,8}='Varianza2';
+DatosEMGCanal1{1,9}='WaveForm1';
+DatosEMGCanal1{1,10}='WaveForm2';
+DatosEMGCanal1{1,11}='WilsonA1';
+DatosEMGCanal1{1,12}='WilsonA2';
+DatosEMGCanal1{1,13}='AverageEnergy1';
+DatosEMGCanal1{1,14}='AverageEnergy2';
+DatosEMGCanal1{1,15}=' skewness1';
+DatosEMGCanal1{1,16}=' skewness2';
+DatosEMGCanal1{1,17}='IntegratedEMG1 ';
+DatosEMGCanal1{1,18}='IntegratedEMG2';
+DatosEMGCanal1{1,19}='MeanAbsolute1 ';
+DatosEMGCanal1{1,20}='MeanAbsolute2';
+
+DatosEMGCanal2{1,1}='ZC3';
+DatosEMGCanal2{1,2}='ZC4';
+DatosEMGCanal2{1,3}='MAV3';
+DatosEMGCanal2{1,4}='MAV4';
+DatosEMGCanal2{1,5}='RMS3';
+DatosEMGCanal2{1,6}='RMS4';
+DatosEMGCanal2{1,7}='Varianza3';
+DatosEMGCanal2{1,8}='Varianza4';
+DatosEMGCanal2{1,9}='WaveForm3';
+DatosEMGCanal2{1,10}='WaveForm4';
+DatosEMGCanal2{1,11}='WilsonA3';
+DatosEMGCanal2{1,12}='WilsonA4';
+DatosEMGCanal2{1,13}='AverageEnergy3';
+DatosEMGCanal2{1,14}='AverageEnergy4';
+DatosEMGCanal2{1,15}=' skewness3';
+DatosEMGCanal2{1,16}=' skewness4';
+DatosEMGCanal2{1,17}='IntegratedEMG3 ';
+DatosEMGCanal2{1,18}='IntegratedEMG4';
+DatosEMGCanal2{1,19}='MeanAbsolute3 ';
+DatosEMGCanal2{1,20}='MeanAbsolute4';
 
 
 
@@ -86,6 +108,30 @@ DatosEMG{1,20}='MeanAbsolute2';
     XtestIntegratedEMG2=[];
      XtestMeanAbsoluteValue2=[];
 
+     eti3 = [];
+     XtestZC3 = [];
+     XtestMAV3 = [];   
+     XtestVAR3 = [];
+     XtestRMS3 = [];
+     XtestWaveF3=[];
+     XtestWilsonA3=[];
+     XtestAverageEnergy3=[];
+      Xtestskewness3=[];
+      XtestIntegratedEMG3=[];
+      XtestMeanAbsoluteValue3=[];
+             
+     eti4 = [];
+     XtestZC4 = [];
+     XtestMAV4 = []; 
+     XtestVAR4 = [];
+     XtestRMS4 = [];
+     XtestWaveF4=[];
+     XtestWilsonA4=[];
+     XtestAverageEnergy4=[];
+     Xtestskewness4=[];
+     XtestIntegratedEMG4=[];
+      XtestMeanAbsoluteValue4=[];
+
 %% Performance measurement
 for i = 1:3
     filelist{i}
@@ -102,7 +148,7 @@ for i = 1:3
         
         % Select channels
        %% epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4','EMG_5','EMG_6','EMG_ref'});
-        epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
+        epo = proc_selectChannels(epo, {'EMG_1','EMG_2'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
         classes=size(epo.className,2); % obtiene las clases que traen las señales
         
         trial=50;
@@ -140,9 +186,9 @@ for i = 1:3
          %para poder obtener los datos y así realizar los entrenamientos. 
 
         [nTimes,nChan,nTrials] = size(concatEpo.x)
-
-for p = 1:nChan
-for j = 1:nTrials
+        
+if concatEpo.x(:,1,:)
+          for j = 1:nTrials
             
     
              varian(j)              =     var(concatEpo.x(:,1,j));
@@ -187,38 +233,117 @@ for j = 1:nTrials
                    
                   end 
           % end
-%         
-% 
+    %         
+    % 
+    end
 end
-end
+    etiqueta2 = concatEpo.y
+
+DatosEMGCanal1{2,1}=  XtestZC1;
+DatosEMGCanal1{2,2}=  XtestZC2;
+DatosEMGCanal1{2,3}=  XtestMAV1;
+DatosEMGCanal1{2,4}=  XtestMAV2;
+DatosEMGCanal1{2,5}=  XtestRMS1;
+DatosEMGCanal1{2,6}=  XtestRMS2;
+DatosEMGCanal1{2,7}=  XtestVAR1;
+DatosEMGCanal1{2,8}=  XtestVAR2;
+DatosEMGCanal1{2,9}=  XtestWaveF1;
+DatosEMGCanal1{2,10}=XtestWaveF2;
+DatosEMGCanal1{2,11}=  XtestWilsonA1;
+DatosEMGCanal1{2,12}=XtestWilsonA2;
+DatosEMGCanal1{2,13}=  XtestAverageEnergy1;
+DatosEMGCanal1{2,14}=XtestAverageEnergy2;
+DatosEMGCanal1{2,15}=    Xtestskewness1;
+DatosEMGCanal1{2,16}=   Xtestskewness2;
+DatosEMGCanal1{2,17}=   XtestIntegratedEMG1;
+DatosEMGCanal1{2,18}=  XtestIntegratedEMG2;
+DatosEMGCanal1{2,19}=      XtestMeanAbsoluteValue1; 
+DatosEMGCanal1{2,20}=     XtestMeanAbsoluteValue2;
+    
+  
+
+
+if concatEpo.x(:,2,:)
+          for j = 1:nTrials
+            
+    
+             varian2(j)              =     var(concatEpo.x(:,2,j));
+             [zc2(j), mav2(j)]   =     metricas(concatEpo.x(:,2,j),0,0);  
+             rmslevel2(j)        =     rms(concatEpo.x(:,2,j));
+             WF2(j)                 =     jWaveformLength(concatEpo.x(:,2,j));
+             Wilson2(j)          =     jWillisonAmplitude(concatEpo.x(:,2,j),0.1);
+             LCOV2(j)            =     jAverageEnergy(concatEpo.x(:,2,j));
+             SKEW2(j)           =      jSkewness(concatEpo.x(:,2,j));
+             IntEMG2(j)            =    jIntegratedEMG(concatEpo.x(:,2,j));
+             MeanAbs2(j)    = jMeanAbsoluteValue(concatEpo.x(:,2,j));
+             
+           %Izquierda
+           %if concatEpo.x(:,p,:) ==3
+               if (concatEpo.y(1,j) == 1) 
+           
+                   XtestZC3 = [XtestZC3;zc2(j)];
+                   XtestVAR3 = [XtestVAR3;varian2(j)];
+                   XtestMAV3 = [XtestMAV3;mav2(j)];
+                   XtestRMS3 = [XtestRMS3;rmslevel2(j)];
+                   XtestWaveF3 = [XtestWaveF3;WF2(j)];
+                    XtestWilsonA3 = [XtestWilsonA3;Wilson2(j)];
+                    XtestAverageEnergy3 = [ XtestAverageEnergy3;LCOV2(j)];
+                    Xtestskewness3=[ Xtestskewness3; SKEW2(j)];
+                     XtestIntegratedEMG3 = [XtestIntegratedEMG3;  IntEMG2(j)];
+                     XtestMeanAbsoluteValue3 =  [XtestMeanAbsoluteValue3;     MeanAbs2(j)];
+          
+               end 
+               %Derecha
+                  if (concatEpo.y(2,j) == 1) 
+      
+                   XtestZC4 = [XtestZC4;zc2(j)];
+                   XtestMAV4 = [XtestMAV4;mav2(j)]; 
+                   XtestVAR4 = [XtestVAR4;varian2(j)];
+                   XtestRMS4 = [XtestRMS4;rmslevel2(j)];
+                   XtestWaveF4 = [XtestWaveF4;WF2(j)];
+                   XtestWilsonA4 = [XtestWilsonA4 ; Wilson2(j)];
+                   XtestAverageEnergy4 = [ XtestAverageEnergy4;LCOV2(j)];
+                   Xtestskewness4= [ Xtestskewness4; SKEW2(j)];
+                   XtestIntegratedEMG4 = [XtestIntegratedEMG4;  IntEMG2(j)];
+                     XtestMeanAbsoluteValue4 =  [XtestMeanAbsoluteValue4;     MeanAbs2(j)];
+                   
+                  end 
+          % end
+    %         
+    % 
+    end
+    
+  
  
-etiqueta2 = concatEpo.y
-
-DatosEMG{2,1}=  XtestZC1;
-DatosEMG{2,2}=  XtestZC2;
-DatosEMG{2,3}=  XtestMAV1;
-DatosEMG{2,4}=  XtestMAV2;
-DatosEMG{2,5}=  XtestRMS1;
-DatosEMG{2,6}=  XtestRMS2;
-DatosEMG{2,7}=  XtestVAR1;
-DatosEMG{2,8}=  XtestVAR2;
-DatosEMG{2,9}=  XtestWaveF1;
-DatosEMG{2,10}=XtestWaveF2;
-DatosEMG{2,11}=  XtestWilsonA1;
-DatosEMG{2,12}=XtestWilsonA2;
-DatosEMG{2,13}=  XtestAverageEnergy1;
-DatosEMG{2,14}=XtestAverageEnergy2;
-DatosEMG{2,15}=    Xtestskewness1;
-DatosEMG{2,16}=   Xtestskewness2;
-DatosEMG{2,17}=   XtestIntegratedEMG1;
-DatosEMG{2,18}=  XtestIntegratedEMG2;
-DatosEMG{2,19}=      XtestMeanAbsoluteValue1; 
-DatosEMG{2,20}=     XtestMeanAbsoluteValue2;
 
 
+DatosEMGCanal2{2,1}=  XtestZC3;
+DatosEMGCanal2{2,2}=  XtestZC4;
+DatosEMGCanal2{2,3}=  XtestMAV3;
+DatosEMGCanal2{2,4}=  XtestMAV4;
+DatosEMGCanal2{2,5}=  XtestRMS3;
+DatosEMGCanal2{2,6}=  XtestRMS4;
+DatosEMGCanal2{2,7}=  XtestVAR3;
+DatosEMGCanal2{2,8}=  XtestVAR4;
+DatosEMGCanal2{2,9}=  XtestWaveF3;
+DatosEMGCanal2{2,10}=XtestWaveF4;
+DatosEMGCanal2{2,11}=  XtestWilsonA3;
+DatosEMGCanal2{2,12}=XtestWilsonA4;
+DatosEMGCanal2{2,13}=  XtestAverageEnergy3;
+DatosEMGCanal2{2,14}=XtestAverageEnergy4;
+DatosEMGCanal2{2,15}=    Xtestskewness3;
+DatosEMGCanal2{2,16}=   Xtestskewness4;
+DatosEMGCanal2{2,17}=   XtestIntegratedEMG3;
+DatosEMGCanal2{2,18}=  XtestIntegratedEMG4;
+DatosEMGCanal2{2,19}=      XtestMeanAbsoluteValue3; 
+DatosEMGCanal2{2,20}=     XtestMeanAbsoluteValue4;
 
+    
+
+
+      end
    
-    end   
+end   
 
     
 end

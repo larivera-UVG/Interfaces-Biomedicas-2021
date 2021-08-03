@@ -19,8 +19,8 @@ clc; close all; clear all;
 %%
 % Directory
 % Write down where converted data file downloaded (file directory)
-dd='C:\Users\barss\OneDrive\Desktop\ReachingSub2EMG\'; 
-cd 'C:\Users\barss\OneDrive\Desktop\ReachingSub2EMG';
+dd='C:\Users\barss\OneDrive\Desktop\ReachingSub2EEG\'; 
+cd 'C:\Users\barss\OneDrive\Desktop\ReachingSub2EEG';
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
 datedir = dir('*.mat');
