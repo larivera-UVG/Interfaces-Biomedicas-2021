@@ -24,7 +24,7 @@
 % 83 % obtenido de resultado de validacion
 
 %% Zero Crossing, MAV, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
-X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12}]';
+X_input = [Canal1EEG{2,3}, Canal1EEG{2,9},Canal1EEG{2,13},Canal1EEG{2,15},Canal1EEG{2,17},Canal1EMG{2,1},Canal1EMG{2,3}, Canal1EMG{2,9},Canal1EMG{2,15},Canal1EMG{2,17},Canal2EEG{2,3}, Canal2EEG{2,9},Canal2EEG{2,13},Canal2EEG{2,15},Canal2EEG{2,17},Canal2EMG{2,1},Canal2EMG{2,3}, Canal2EMG{2,9},Canal2EMG{2,15},Canal2EMG{2,17}; Canal1EEG{2,4},Canal1EEG{2,10},Canal1EEG{2,14},Canal1EEG{2,16},Canal1EEG{2,18},Canal1EMG{2,2},Canal1EMG{2,4}, Canal1EMG{2,10},Canal1EMG{2,16},Canal1EMG{2,18},Canal2EEG{2,4},Canal2EEG{2,10},Canal2EEG{2,14},Canal2EEG{2,16},Canal2EEG{2,18},Canal2EMG{2,2},Canal2EMG{2,4}, Canal2EMG{2,10},Canal2EMG{2,16},Canal2EMG{2,18}]';
 
 %%  RMS, WAVELET 
 
@@ -32,8 +32,8 @@ X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2
  
 
 
-Xtarget = [ones(length(DatosEMG{2,1}),1),zeros(length(DatosEMG{2,1}),1);
-           zeros(length(DatosEMG{2,2}),1),ones(length(DatosEMG{2,2}),1)]';
+Xtarget = [ones(length(Canal1EMG{2,1}),1),zeros(length(Canal1EMG{2,1}),1);
+           zeros(length(Canal1EMG{2,2}),1),ones(length(Canal1EMG{2,2}),1)]';
     
 
 
@@ -60,7 +60,7 @@ hiddenLayerSize = 10;
 net = patternnet(hiddenLayerSize, trainFcn);
 
 % Setup Division of Data for Training, Validation, Testing
-net.divideParam.trainRatio = 85/100;
+net.divideParam.trainRatio = 80/100;
 net.divideParam.valRatio = 10/100;
 net.divideParam.testRatio = 10/100;
 

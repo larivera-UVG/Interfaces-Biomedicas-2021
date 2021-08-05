@@ -24,7 +24,7 @@
 % 83 % obtenido de resultado de validacion
 
 %% Zero Crossing, MAV, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
-X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12}]';
+X_input = [ Canal1{2,1},Canal1{2,7}, Canal1{2,13}; Canal1{2,8},Canal1{2,8}, Canal1{2,14};Canal1{2,3},Canal1{2,9}, Canal1{2,15};Canal1{2,4},Canal1{2,10}, Canal1{2,16};Canal1{2,5},Canal1{2,11}, Canal1{2,17};Canal1{2,6},Canal1{2,12}, Canal1{2,18}]';
 
 %%  RMS, WAVELET 
 
@@ -32,8 +32,12 @@ X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2
  
 
 
-Xtarget = [ones(length(DatosEMG{2,1}),1),zeros(length(DatosEMG{2,1}),1);
-           zeros(length(DatosEMG{2,2}),1),ones(length(DatosEMG{2,2}),1)]';
+Xtarget = [ones(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1);
+           zeros(length(Canal1{2,2}),1),ones(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1);
+           zeros(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),ones(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1);
+           zeros(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),ones(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1);
+           zeros(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),ones(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1);
+           zeros(length(Canal1{2,2}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),zeros(length(Canal1{2,1}),1),ones(length(Canal1{2,2}),1)]';
     
 
 

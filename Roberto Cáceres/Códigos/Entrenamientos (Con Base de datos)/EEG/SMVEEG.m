@@ -5,9 +5,9 @@
 %con las 4 caracteristicas.
 
 %% SVM
-for ii=1:length(DatosEMG{2,2})
-   if (DatosEMG{2,2}(ii) == 2) 
-       DatosEMG{2,2}(ii) = 0;
+for ii=1:length(DatosEEG{2,2})
+   if (DatosEEG{2,2}(ii) == 2) 
+       DatosEEG{2,2}(ii) = 0;
    end
 end
 
@@ -37,22 +37,22 @@ Limit = 420;
 Init = Limit+1;
 %X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:),data2{2,1}(1:30,:),data2{2,3}(1:30,:),data2{2,5}(1:30,:),data2{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:),data2{2,2}(1:30,:),data2{2,4}(1:30,:),data2{2,6}(1:30,:),data2{2,8}(1:30,:)];
 % X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:)];       
-X_train = [ DatosEMG{2,1}(1:Limit,:),DatosEMG{2,3}(1:Limit,:), DatosEMG{2,9}(1:Limit,:),DatosEMG{2,15}(1:Limit,:),DatosEMG{2,17}(1:Limit,:); DatosEMG{2,2}(1:Limit,:),DatosEMG{2,4}(1:Limit,:), DatosEMG{2,10}(1:Limit,:),DatosEMG{2,16}(1:Limit,:),DatosEMG{2,18}(1:Limit,:)];
+X_train = [ DatosEEG{2,3}(1:Limit,:), DatosEEG{2,9}(1:Limit,:),DatosEEG{2,13}(1:Limit,:),DatosEEG{2,15}(1:Limit,:),DatosEEG{2,17}(1:Limit,:); DatosEEG{2,4}(1:Limit,:),DatosEEG{2,10}(1:Limit,:),DatosEEG{2,14}(1:Limit,:),DatosEEG{2,16}(1:Limit,:),DatosEEG{2,18}(1:Limit,:)];
 
 %Xtarget = [ones(length(data{2,1}(1:30,:)),1);  2*ones(length(data{2,2}(1:30,:)),1)];
 
-Xtarget = [ones(length(DatosEMG{2,1}(1:Limit,:)),1);  2*ones(length(DatosEMG{2,2}(1:Limit,:)),1)];
+Xtarget = [ones(length(DatosEEG{2,1}(1:Limit,:)),1);  2*ones(length(DatosEEG{2,2}(1:Limit,:)),1)];
 
 Y= Xtarget ;
 
-X_test = [ DatosEMG{2,1}(Init:end,:),DatosEMG{2,3}(Init:end,:), DatosEMG{2,9}(Init:end,:), DatosEMG{2,15}(Init:end,:),DatosEMG{2,17}(Init:end,:); DatosEMG{2,2}(Init:end,:),DatosEMG{2,4}(Init:end,:), DatosEMG{2,10}(Init:end,:), DatosEMG{2,16}(Init:end,:),DatosEMG{2,18}(Init:end,:)];
+X_test = [ DatosEEG{2,3}(Init:end,:), DatosEEG{2,9}(Init:end,:), DatosEEG{2,13}(Init:end,:),DatosEEG{2,15}(Init:end,:),DatosEEG{2,17}(Init:end,:); DatosEEG{2,4}(Init:end,:),DatosEEG{2,10}(Init:end,:),DatosEEG{2,14}(Init:end,:),DatosEEG{2,16}(Init:end,:),DatosEEG{2,18}(Init:end,:)];
 
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:),data2{2,1}(31:50,:),data2{2,3}(31:50,:),data2{2,5}(31:50,:),data2{2,7}(31:50,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:),data2{2,2}(31:50,:),data2{2,4}(31:50,:),data2{2,6}(31:50,:),data2{2,8}(31:50,:)];
  
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:)];      
  %--------------------------------------       
 %Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),1)];
-Ysol= [ones(length(DatosEMG{2,1}(Init:end,:)),1) ;  2*ones(length(DatosEMG{2,2}(Init:end,:)),1)];
+Ysol= [ones(length(DatosEEG{2,1}(Init:end,:)),1) ;  2*ones(length(DatosEEG{2,2}(Init:end,:)),1)];
         
 %figure(7); clf;
 %gscatter(X_train,Y);
@@ -120,3 +120,4 @@ plotconfusion(NYsol,NAsig1);
 plotconfusion(NYsol,NAsig2);
 plotconfusion(NYsol,NAsig3);
 plotconfusion(NYsol,NAsig4);
+

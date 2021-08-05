@@ -1,6 +1,4 @@
 % -------------------------------------------------------------------------
-%Roberto Caceres - 17163
-%2021
 % ACC_WistTwisting.m
 % This source code is about to measure the classification accuracy based on the basic machine learning method.
 % This classification accuracy was computed by usign the fundamental EEG signal processing such band-pass filtering, time epoch, feature extraction, classification.
@@ -26,8 +24,8 @@ clc; close all; clear all;
 % ellos hicieron, teniendo así acceso a cada uno de los datos importantes para poder realizar los entrenamientos
 
 
-dd='C:\Users\barss\OneDrive\Desktop\SeñalesEMG\'; %% le damos una direccion para ir a buscar los datos 
-cd 'C:\Users\barss\OneDrive\Desktop\SeñalesEMG'; 
+dd='C:\Users\barss\OneDrive\Desktop\SeñalesEEG\'; %% le damos una direccion para ir a buscar los datos 
+cd 'C:\Users\barss\OneDrive\Desktop\SeñalesEEG'; 
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
 datedir = dir('*.mat'); %% le dice que tipo de dato tiene que buscar en la dirección
@@ -36,50 +34,51 @@ filelist = {datedir.name}; %%vuelve los archivos de ese tipo en esa direccion un
 % Setting time duration: interval 0~3 s
 ival=[0 3001]; %para poder filtrar luego
 
-DatosEMGCanal1 = cell(2,10);
-DatosEMGCanal2 = cell(2,10);
+DatosEEGCanal1 = cell(2,10);
 
-DatosEMGCanal1{1,1}='ZC1';
-DatosEMGCanal1{1,2}='ZC2';
-DatosEMGCanal1{1,3}='MAV1';
-DatosEMGCanal1{1,4}='MAV2';
-DatosEMGCanal1{1,5}='RMS1';
-DatosEMGCanal1{1,6}='RMS2';
-DatosEMGCanal1{1,7}='Varianza1';
-DatosEMGCanal1{1,8}='Varianza2';
-DatosEMGCanal1{1,9}='WaveForm1';
-DatosEMGCanal1{1,10}='WaveForm2';
-DatosEMGCanal1{1,11}='WilsonA1';
-DatosEMGCanal1{1,12}='WilsonA2';
-DatosEMGCanal1{1,13}='AverageEnergy1';
-DatosEMGCanal1{1,14}='AverageEnergy2';
-DatosEMGCanal1{1,15}=' skewness1';
-DatosEMGCanal1{1,16}=' skewness2';
-DatosEMGCanal1{1,17}='IntegratedEMG1 ';
-DatosEMGCanal1{1,18}='IntegratedEMG2';
-DatosEMGCanal1{1,19}='MeanAbsolute1 ';
-DatosEMGCanal1{1,20}='MeanAbsolute2';
+DatosEEGCanal1{1,1}='ZC1';
+DatosEEGCanal1{1,2}='ZC2';
+DatosEEGCanal1{1,3}='MAV1';
+DatosEEGCanal1{1,4}='MAV2';
+DatosEEGCanal1{1,5}='RMS1';
+DatosEEGCanal1{1,6}='RMS2';
+DatosEEGCanal1{1,7}='Varianza1';
+DatosEEGCanal1{1,8}='Varianza2';
+DatosEEGCanal1{1,9}='WaveForm1';
+DatosEEGCanal1{1,10}='WaveForm2';
+DatosEEGCanal1{1,11}='WilsonA1';
+DatosEEGCanal1{1,12}='WilsonA2';
+DatosEEGCanal1{1,13}='ShannonEntropy1';
+DatosEEGCanal1{1,14}='ShannonEntropy2';
+DatosEEGCanal1{1,15}=' skewness1';
+DatosEEGCanal1{1,16}=' skewness2';
+DatosEEGCanal1{1,17}='LogEnergyEntropy1 ';
+DatosEEGCanal1{1,18}='LogEnergyEntropy2';
+DatosEEGCanal1{1,19}='MeanAbsolute1 ';
+DatosEEGCanal1{1,20}='MeanAbsolute2';
 
-DatosEMGCanal2{1,1}='ZC3';
-DatosEMGCanal2{1,2}='ZC4';
-DatosEMGCanal2{1,3}='MAV3';
-DatosEMGCanal2{1,4}='MAV4';
-DatosEMGCanal2{1,5}='RMS3';
-DatosEMGCanal2{1,6}='RMS4';
-DatosEMGCanal2{1,7}='Varianza3';
-DatosEMGCanal2{1,8}='Varianza4';
-DatosEMGCanal2{1,9}='WaveForm3';
-DatosEMGCanal2{1,10}='WaveForm4';
-DatosEMGCanal2{1,11}='WilsonA3';
-DatosEMGCanal2{1,12}='WilsonA4';
-DatosEMGCanal2{1,13}='AverageEnergy3';
-DatosEMGCanal2{1,14}='AverageEnergy4';
-DatosEMGCanal2{1,15}=' skewness3';
-DatosEMGCanal2{1,16}=' skewness4';
-DatosEMGCanal2{1,17}='IntegratedEMG3 ';
-DatosEMGCanal2{1,18}='IntegratedEMG4';
-DatosEMGCanal2{1,19}='MeanAbsolute3 ';
-DatosEMGCanal2{1,20}='MeanAbsolute4';
+
+DatosEEGCanal2{1,1}='ZC3';
+DatosEEGCanal2{1,2}='ZC4';
+DatosEEGCanal2{1,3}='MAV3';
+DatosEEGCanal2{1,4}='MAV4';
+DatosEEGCanal2{1,5}='RMS3';
+DatosEEGCanal2{1,6}='RMS4';
+DatosEEGCanal2{1,7}='Varianza3';
+DatosEEGCanal2{1,8}='Varianza4';
+DatosEEGCanal2{1,9}='WaveForm3';
+DatosEEGCanal2{1,10}='WaveForm4';
+DatosEEGCanal2{1,11}='WilsonA3';
+DatosEEGCanal2{1,12}='WilsonA4';
+DatosEEGCanal2{1,13}='ShannonEntropy3';
+DatosEEGCanal2{1,14}='ShannonEntropy4';
+DatosEEGCanal2{1,15}=' skewness3';
+DatosEEGCanal2{1,16}=' skewness4';
+DatosEEGCanal2{1,17}='LogEnergyEntropy3 ';
+DatosEEGCanal2{1,18}='LogEnergyEntropy4';
+DatosEEGCanal2{1,19}='MeanAbsolute3 ';
+DatosEEGCanal2{1,20}='MeanAbsolute4';
+
 
 
 
@@ -91,9 +90,9 @@ DatosEMGCanal2{1,20}='MeanAbsolute4';
     XtestRMS1 = [];
     XtestWaveF1=[];
     XtestWilsonA1=[];
-    XtestAverageEnergy1=[];
+    XtestShannonEntropy1=[];
      Xtestskewness1=[];
-     XtestIntegratedEMG1=[];
+     XtestLogEnergyEntropy1=[];
      XtestMeanAbsoluteValue1=[];
             
     eti2 = [];
@@ -103,34 +102,34 @@ DatosEMGCanal2{1,20}='MeanAbsolute4';
     XtestRMS2 = [];
     XtestWaveF2=[];
     XtestWilsonA2=[];
-    XtestAverageEnergy2=[];
+    XtestShannonEntropy2=[];
     Xtestskewness2=[];
-    XtestIntegratedEMG2=[];
+    XtestLogEnergyEntropy2=[];
      XtestMeanAbsoluteValue2=[];
-
-     eti3 = [];
-     XtestZC3 = [];
-     XtestMAV3 = [];   
-     XtestVAR3 = [];
-     XtestRMS3 = [];
-     XtestWaveF3=[];
-     XtestWilsonA3=[];
-     XtestAverageEnergy3=[];
-      Xtestskewness3=[];
-      XtestIntegratedEMG3=[];
-      XtestMeanAbsoluteValue3=[];
-             
-     eti4 = [];
-     XtestZC4 = [];
-     XtestMAV4 = []; 
-     XtestVAR4 = [];
-     XtestRMS4 = [];
-     XtestWaveF4=[];
-     XtestWilsonA4=[];
-     XtestAverageEnergy4=[];
-     Xtestskewness4=[];
-     XtestIntegratedEMG4=[];
-      XtestMeanAbsoluteValue4=[];
+     
+         eti3 = [];
+    XtestZC3 = [];
+    XtestMAV3 = [];   
+    XtestVAR3 = [];
+    XtestRMS3 = [];
+    XtestWaveF3=[];
+    XtestWilsonA3=[];
+    XtestShannonEntropy3=[];
+     Xtestskewness3=[];
+     XtestLogEnergyEntropy3=[];
+     XtestMeanAbsoluteValue3=[];
+            
+    eti4 = [];
+    XtestZC4 = [];
+    XtestMAV4 = []; 
+    XtestVAR4 = [];
+    XtestRMS4 = [];
+    XtestWaveF4=[];
+    XtestWilsonA4=[];
+    XtestShannonEntropy4=[];
+    Xtestskewness4=[];
+    XtestLogEnergyEntropy4=[];
+     XtestMeanAbsoluteValue4=[];
 
 %% Performance measurement
 for i = 1:3
@@ -148,9 +147,9 @@ for i = 1:3
         
         % Select channels
        %% epo = proc_selectChannels(epo, {'EMG_1','EMG_2','EMG_3','EMG_4','EMG_5','EMG_6','EMG_ref'});
-        epo = proc_selectChannels(epo, {'EMG_1','EMG_2'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
+        epo = proc_selectChannels(epo, {'AF3','AF4'}); %seleccionamos que canales utilizaremos para poder extraerlos. 
         classes=size(epo.className,2); % obtiene las clases que traen las señales
-        
+        %'AF3','F4','AF4'
         trial=50;
         
         % Set the number of rest trial to the same as the number of other classes trial.
@@ -186,164 +185,147 @@ for i = 1:3
          %para poder obtener los datos y así realizar los entrenamientos. 
 
         [nTimes,nChan,nTrials] = size(concatEpo.x)
-        
 if concatEpo.x(:,1,:)
-          for j = 1:nTrials
+for j = 1:nTrials
             
     
-             varian(j)              =     var(concatEpo.x(:,1,j));
+            varian(j)              =     var(concatEpo.x(:,1,j));
              [zc(j), mav(j)]   =     metricas(concatEpo.x(:,1,j),0,0);  
              rmslevel(j)        =     rms(concatEpo.x(:,1,j));
              WF(j)                 =     jWaveformLength(concatEpo.x(:,1,j));
              Wilson(j)          =     jWillisonAmplitude(concatEpo.x(:,1,j),0.1);
-             LCOV(j)            =     jAverageEnergy(concatEpo.x(:,1,j));
+             Shanon(j)            =     jShannonEntropy(concatEpo.x(:,1,j));
              SKEW(j)           =      jSkewness(concatEpo.x(:,1,j));
-             IntEMG(j)            =    jIntegratedEMG(concatEpo.x(:,1,j));
+             Entropy(j)            =    jLogEnergyEntropy(concatEpo.x(:,1,j));
              MeanAbs(j)    = jMeanAbsoluteValue(concatEpo.x(:,1,j));
-             
            %Izquierda
-           %if concatEpo.x(:,p,:) ==3
-               if (concatEpo.y(1,j) == 1) 
            
+                    if concatEpo.y(1,j) == 1
                    XtestZC1 = [XtestZC1;zc(j)];
                    XtestVAR1 = [XtestVAR1;varian(j)];
                    XtestMAV1 = [XtestMAV1;mav(j)];
                    XtestRMS1 = [XtestRMS1;rmslevel(j)];
                    XtestWaveF1 = [XtestWaveF1;WF(j)];
                     XtestWilsonA1 = [XtestWilsonA1;Wilson(j)];
-                    XtestAverageEnergy1 = [ XtestAverageEnergy1;LCOV(j)];
+                    XtestShannonEntropy1 = [ XtestShannonEntropy1;Shanon(j)];
                     Xtestskewness1=[ Xtestskewness1; SKEW(j)];
-                     XtestIntegratedEMG1 = [XtestIntegratedEMG1;  IntEMG(j)];
+                     XtestLogEnergyEntropy1 = [XtestLogEnergyEntropy1;  Entropy(j)];
                      XtestMeanAbsoluteValue1 =  [XtestMeanAbsoluteValue1;     MeanAbs(j)];
-          
                end 
                %Derecha
-                  if (concatEpo.y(2,j) == 1) 
-      
+                  if concatEpo.y(2,j) == 1
                    XtestZC2 = [XtestZC2;zc(j)];
                    XtestMAV2 = [XtestMAV2;mav(j)]; 
                    XtestVAR2 = [XtestVAR2;varian(j)];
                    XtestRMS2 = [XtestRMS2;rmslevel(j)];
                    XtestWaveF2 = [XtestWaveF2;WF(j)];
                    XtestWilsonA2 = [XtestWilsonA2 ; Wilson(j)];
-                   XtestAverageEnergy2 = [ XtestAverageEnergy2;LCOV(j)];
+                   XtestShannonEntropy2 = [ XtestShannonEntropy2;Shanon(j)];
                    Xtestskewness2= [ Xtestskewness2; SKEW(j)];
-                   XtestIntegratedEMG2 = [XtestIntegratedEMG2;  IntEMG(j)];
+                   XtestLogEnergyEntropy2 = [XtestLogEnergyEntropy2;  Entropy(j)];
                      XtestMeanAbsoluteValue2 =  [XtestMeanAbsoluteValue2;     MeanAbs(j)];
-                   
                   end 
-          % end
-    %         
-    % 
-    end
+              
+%         
+% 
 end
-    etiqueta2 = concatEpo.y
-
-DatosEMGCanal1{2,1}=  XtestZC1;
-DatosEMGCanal1{2,2}=  XtestZC2;
-DatosEMGCanal1{2,3}=  XtestMAV1;
-DatosEMGCanal1{2,4}=  XtestMAV2;
-DatosEMGCanal1{2,5}=  XtestRMS1;
-DatosEMGCanal1{2,6}=  XtestRMS2;
-DatosEMGCanal1{2,7}=  XtestVAR1;
-DatosEMGCanal1{2,8}=  XtestVAR2;
-DatosEMGCanal1{2,9}=  XtestWaveF1;
-DatosEMGCanal1{2,10}=XtestWaveF2;
-DatosEMGCanal1{2,11}=  XtestWilsonA1;
-DatosEMGCanal1{2,12}=XtestWilsonA2;
-DatosEMGCanal1{2,13}=  XtestAverageEnergy1;
-DatosEMGCanal1{2,14}=XtestAverageEnergy2;
-DatosEMGCanal1{2,15}=    Xtestskewness1;
-DatosEMGCanal1{2,16}=   Xtestskewness2;
-DatosEMGCanal1{2,17}=   XtestIntegratedEMG1;
-DatosEMGCanal1{2,18}=  XtestIntegratedEMG2;
-DatosEMGCanal1{2,19}=      XtestMeanAbsoluteValue1; 
-DatosEMGCanal1{2,20}=     XtestMeanAbsoluteValue2;
-    
-  
-
+end
 
 if concatEpo.x(:,2,:)
-          for j = 1:nTrials
+for j = 1:nTrials
             
     
-             varian2(j)              =     var(concatEpo.x(:,2,j));
+            varian2(j)              =     var(concatEpo.x(:,2,j));
              [zc2(j), mav2(j)]   =     metricas(concatEpo.x(:,2,j),0,0);  
              rmslevel2(j)        =     rms(concatEpo.x(:,2,j));
              WF2(j)                 =     jWaveformLength(concatEpo.x(:,2,j));
              Wilson2(j)          =     jWillisonAmplitude(concatEpo.x(:,2,j),0.1);
-             LCOV2(j)            =     jAverageEnergy(concatEpo.x(:,2,j));
+             Shanon2(j)            =     jShannonEntropy(concatEpo.x(:,2,j));
              SKEW2(j)           =      jSkewness(concatEpo.x(:,2,j));
-             IntEMG2(j)            =    jIntegratedEMG(concatEpo.x(:,2,j));
+             Entropy2(j)            =    jLogEnergyEntropy(concatEpo.x(:,2,j));
              MeanAbs2(j)    = jMeanAbsoluteValue(concatEpo.x(:,2,j));
-             
            %Izquierda
-           %if concatEpo.x(:,p,:) ==3
-               if (concatEpo.y(1,j) == 1) 
-           
+      
+               
+                   if concatEpo.y(1,j) == 1
                    XtestZC3 = [XtestZC3;zc2(j)];
                    XtestVAR3 = [XtestVAR3;varian2(j)];
                    XtestMAV3 = [XtestMAV3;mav2(j)];
                    XtestRMS3 = [XtestRMS3;rmslevel2(j)];
                    XtestWaveF3 = [XtestWaveF3;WF2(j)];
-                    XtestWilsonA3 = [XtestWilsonA3;Wilson2(j)];
-                    XtestAverageEnergy3 = [ XtestAverageEnergy3;LCOV2(j)];
+                    XtestWilsonA3= [XtestWilsonA3;Wilson2(j)];
+                    XtestShannonEntropy3 = [ XtestShannonEntropy3;Shanon2(j)];
                     Xtestskewness3=[ Xtestskewness3; SKEW2(j)];
-                     XtestIntegratedEMG3 = [XtestIntegratedEMG3;  IntEMG2(j)];
+                     XtestLogEnergyEntropy3 = [XtestLogEnergyEntropy3;  Entropy2(j)];
                      XtestMeanAbsoluteValue3 =  [XtestMeanAbsoluteValue3;     MeanAbs2(j)];
-          
                end 
                %Derecha
-                  if (concatEpo.y(2,j) == 1) 
-      
+                  if concatEpo.y(2,j) == 1
                    XtestZC4 = [XtestZC4;zc2(j)];
                    XtestMAV4 = [XtestMAV4;mav2(j)]; 
                    XtestVAR4 = [XtestVAR4;varian2(j)];
                    XtestRMS4 = [XtestRMS4;rmslevel2(j)];
                    XtestWaveF4 = [XtestWaveF4;WF2(j)];
                    XtestWilsonA4 = [XtestWilsonA4 ; Wilson2(j)];
-                   XtestAverageEnergy4 = [ XtestAverageEnergy4;LCOV2(j)];
+                   XtestShannonEntropy4 = [ XtestShannonEntropy4;Shanon2(j)];
                    Xtestskewness4= [ Xtestskewness4; SKEW2(j)];
-                   XtestIntegratedEMG4 = [XtestIntegratedEMG4;  IntEMG2(j)];
+                   XtestLogEnergyEntropy4 = [XtestLogEnergyEntropy4;  Entropy2(j)];
                      XtestMeanAbsoluteValue4 =  [XtestMeanAbsoluteValue4;     MeanAbs2(j)];
-                   
-                  end 
-          % end
-    %         
-    % 
-    end
-    
-  
+               end 
+%         
+% 
+end
+
  
+etiqueta2 = concatEpo.y
+
+DatosEEGCanal1{2,1}=  XtestZC1;
+DatosEEGCanal1{2,2}=  XtestZC2;
+DatosEEGCanal1{2,3}=  XtestMAV1;
+DatosEEGCanal1{2,4}=  XtestMAV2;
+DatosEEGCanal1{2,5}=  XtestRMS1;
+DatosEEGCanal1{2,6}=  XtestRMS2;
+DatosEEGCanal1{2,7}=  XtestVAR1;
+DatosEEGCanal1{2,8}=  XtestVAR2;
+DatosEEGCanal1{2,9}=  XtestWaveF1;
+DatosEEGCanal1{2,10}=XtestWaveF2;
+DatosEEGCanal1{2,11}=  XtestWilsonA1;
+DatosEEGCanal1{2,12}=XtestWilsonA2;
+DatosEEGCanal1{2,13}=  XtestShannonEntropy1;
+DatosEEGCanal1{2,14}=XtestShannonEntropy2;
+DatosEEGCanal1{2,15}=    Xtestskewness1;
+DatosEEGCanal1{2,16}=   Xtestskewness2;
+DatosEEGCanal1{2,17}=   XtestLogEnergyEntropy1;
+DatosEEGCanal1{2,18}=  XtestLogEnergyEntropy2;
+DatosEEGCanal1{2,19}=      XtestMeanAbsoluteValue1;
+DatosEEGCanal1{2,20}=     XtestMeanAbsoluteValue2;
+
+DatosEEGCanal2{2,1}=  XtestZC3;
+DatosEEGCanal2{2,2}=  XtestZC4;
+DatosEEGCanal2{2,3}=  XtestMAV3;
+DatosEEGCanal2{2,4}=  XtestMAV4;
+DatosEEGCanal2{2,5}=  XtestRMS3;
+DatosEEGCanal2{2,6}=  XtestRMS4;
+DatosEEGCanal2{2,7}=  XtestVAR3;
+DatosEEGCanal2{2,8}=  XtestVAR4;
+DatosEEGCanal2{2,9}=  XtestWaveF3;
+DatosEEGCanal2{2,10}=XtestWaveF4;
+DatosEEGCanal2{2,11}=  XtestWilsonA3;
+DatosEEGCanal2{2,12}=XtestWilsonA4;
+DatosEEGCanal2{2,13}=  XtestShannonEntropy3;
+DatosEEGCanal2{2,14}=XtestShannonEntropy4;
+DatosEEGCanal2{2,15}=    Xtestskewness3;
+DatosEEGCanal2{2,16}=   Xtestskewness4;
+DatosEEGCanal2{2,17}=   XtestLogEnergyEntropy3;
+DatosEEGCanal2{2,18}=  XtestLogEnergyEntropy4;
+DatosEEGCanal2{2,19}=      XtestMeanAbsoluteValue3;
+DatosEEGCanal2{2,20}=     XtestMeanAbsoluteValue4;
+end
 
 
-DatosEMGCanal2{2,1}=  XtestZC3;
-DatosEMGCanal2{2,2}=  XtestZC4;
-DatosEMGCanal2{2,3}=  XtestMAV3;
-DatosEMGCanal2{2,4}=  XtestMAV4;
-DatosEMGCanal2{2,5}=  XtestRMS3;
-DatosEMGCanal2{2,6}=  XtestRMS4;
-DatosEMGCanal2{2,7}=  XtestVAR3;
-DatosEMGCanal2{2,8}=  XtestVAR4;
-DatosEMGCanal2{2,9}=  XtestWaveF3;
-DatosEMGCanal2{2,10}=XtestWaveF4;
-DatosEMGCanal2{2,11}=  XtestWilsonA3;
-DatosEMGCanal2{2,12}=XtestWilsonA4;
-DatosEMGCanal2{2,13}=  XtestAverageEnergy3;
-DatosEMGCanal2{2,14}=XtestAverageEnergy4;
-DatosEMGCanal2{2,15}=    Xtestskewness3;
-DatosEMGCanal2{2,16}=   Xtestskewness4;
-DatosEMGCanal2{2,17}=   XtestIntegratedEMG3;
-DatosEMGCanal2{2,18}=  XtestIntegratedEMG4;
-DatosEMGCanal2{2,19}=      XtestMeanAbsoluteValue3; 
-DatosEMGCanal2{2,20}=     XtestMeanAbsoluteValue4;
 
-    
-
-
-      end
    
-end   
+    end   
 
     
 end

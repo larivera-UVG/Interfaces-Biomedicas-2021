@@ -24,7 +24,7 @@
 % 83 % obtenido de resultado de validacion
 
 %% Zero Crossing, MAV, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
-X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2,11}; DatosEMG{2,2},DatosEMG{2,4},DatosEMG{2,8},DatosEMG{2,10},DatosEMG{2,12}]';
+X_input = [DatosEEG{2,1}, DatosEEG{2,3}, DatosEEG{2,7}, DatosEEG{2,9},DatosEEG{2,11}; DatosEEG{2,2},DatosEEG{2,4},DatosEEG{2,8},DatosEEG{2,10},DatosEEG{2,12}]';
 
 %%  RMS, WAVELET 
 
@@ -32,8 +32,8 @@ X_input = [DatosEMG{2,1}, DatosEMG{2,3}, DatosEMG{2,7}, DatosEMG{2,9},DatosEMG{2
  
 
 
-Xtarget = [ones(length(DatosEMG{2,1}),1),zeros(length(DatosEMG{2,1}),1);
-           zeros(length(DatosEMG{2,2}),1),ones(length(DatosEMG{2,2}),1)]';
+Xtarget = [ones(length(DatosEEG{2,1}),1),zeros(length(DatosEEG{2,1}),1);
+           zeros(length(DatosEEG{2,2}),1),ones(length(DatosEEG{2,2}),1)]';
     
 
 
@@ -60,7 +60,7 @@ hiddenLayerSize = 10;
 net = patternnet(hiddenLayerSize, trainFcn);
 
 % Setup Division of Data for Training, Validation, Testing
-net.divideParam.trainRatio = 85/100;
+net.divideParam.trainRatio = 80/100;
 net.divideParam.valRatio = 10/100;
 net.divideParam.testRatio = 10/100;
 

@@ -5,11 +5,11 @@
 %con las 4 caracteristicas.
 
 %% SVM
-for ii=1:length(DatosEMG{2,2})
-   if (DatosEMG{2,2}(ii) == 2) 
-       DatosEMG{2,2}(ii) = 0;
-   end
-end
+% for ii=1:length(DatosEMG{2,2})
+%    if (DatosEMG{2,2}(ii) == 2) 
+%        DatosEMG{2,2}(ii) = 0;
+%    end
+% end
 
 %MAV y ZC
 % X_train = [data{2,3}(1:20,:), data{2,5}(1:20,:);
@@ -33,26 +33,26 @@ end
 %            data{2,8}(21:end,:), data{2,10}(21:end,:)];
 
 %Todas juntas
-Limit = 420;
+Limit = 105;
 Init = Limit+1;
 %X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:),data2{2,1}(1:30,:),data2{2,3}(1:30,:),data2{2,5}(1:30,:),data2{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:),data2{2,2}(1:30,:),data2{2,4}(1:30,:),data2{2,6}(1:30,:),data2{2,8}(1:30,:)];
 % X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:)];       
-X_train = [ DatosEMG{2,1}(1:Limit,:),DatosEMG{2,3}(1:Limit,:), DatosEMG{2,9}(1:Limit,:),DatosEMG{2,15}(1:Limit,:),DatosEMG{2,17}(1:Limit,:); DatosEMG{2,2}(1:Limit,:),DatosEMG{2,4}(1:Limit,:), DatosEMG{2,10}(1:Limit,:),DatosEMG{2,16}(1:Limit,:),DatosEMG{2,18}(1:Limit,:)];
+X_train = [ Canal1{2,1}(1:Limit,:),Canal1{2,7}(1:Limit,:), Canal1{2,13}(1:Limit,:); Canal1{2,8}(1:Limit,:),Canal1{2,8}(1:Limit,:), Canal1{2,14}(1:Limit,:);Canal1{2,3}(1:Limit,:),Canal1{2,9}(1:Limit,:), Canal1{2,15}(1:Limit,:);Canal1{2,4}(1:Limit,:),Canal1{2,10}(1:Limit,:), Canal1{2,16}(1:Limit,:);Canal1{2,5}(1:Limit,:),Canal1{2,11}(1:Limit,:), Canal1{2,17}(1:Limit,:);Canal1{2,6}(1:Limit,:),Canal1{2,12}(1:Limit,:), Canal1{2,18}(1:Limit,:)];
 
 %Xtarget = [ones(length(data{2,1}(1:30,:)),1);  2*ones(length(data{2,2}(1:30,:)),1)];
 
-Xtarget = [ones(length(DatosEMG{2,1}(1:Limit,:)),1);  2*ones(length(DatosEMG{2,2}(1:Limit,:)),1)];
+Xtarget = [ones(length(Canal1{2,1}(1:Limit,:)),1);  2*ones(length(Canal1{2,2}(1:Limit,:)),1); 3*ones(length(Canal1{2,2}(1:Limit,:)),1);4*ones(length(Canal1{2,2}(1:Limit,:)),1);5*ones(length(Canal1{2,2}(1:Limit,:)),1);6*ones(length(Canal1{2,2}(1:Limit,:)),1) ];
 
 Y= Xtarget ;
 
-X_test = [ DatosEMG{2,1}(Init:end,:),DatosEMG{2,3}(Init:end,:), DatosEMG{2,9}(Init:end,:), DatosEMG{2,15}(Init:end,:),DatosEMG{2,17}(Init:end,:); DatosEMG{2,2}(Init:end,:),DatosEMG{2,4}(Init:end,:), DatosEMG{2,10}(Init:end,:), DatosEMG{2,16}(Init:end,:),DatosEMG{2,18}(Init:end,:)];
+X_test = [ Canal1{2,1}(Init:end,:),Canal1{2,7}(Init:end,:), Canal1{2,13}(Init:end,:);Canal1{2,2}(Init:end,:),Canal1{2,8}(Init:end,:), Canal1{2,14}(Init:end,:);Canal1{2,3}(Init:end,:),Canal1{2,9}(Init:end,:), Canal1{2,15}(Init:end,:);Canal1{2,4}(Init:end,:),Canal1{2,10}(Init:end,:), Canal1{2,16}(Init:end,:);Canal1{2,5}(Init:end,:),Canal1{2,11}(Init:end,:), Canal1{2,17}(Init:end,:);Canal1{2,6}(Init:end,:),Canal1{2,12}(Init:end,:), Canal1{2,18}(Init:end,:)];
 
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:),data2{2,1}(31:50,:),data2{2,3}(31:50,:),data2{2,5}(31:50,:),data2{2,7}(31:50,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:),data2{2,2}(31:50,:),data2{2,4}(31:50,:),data2{2,6}(31:50,:),data2{2,8}(31:50,:)];
  
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:)];      
  %--------------------------------------       
 %Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),1)];
-Ysol= [ones(length(DatosEMG{2,1}(Init:end,:)),1) ;  2*ones(length(DatosEMG{2,2}(Init:end,:)),1)];
+Ysol= [ones(length(Canal1{2,1}(Init:end,:)),1) ;  2*ones(length(Canal1{2,2}(Init:end,:)),1);3*ones(length(Canal1{2,2}(Init:end,:)),1);4*ones(length(Canal1{2,2}(Init:end,:)),1);5*ones(length(Canal1{2,2}(Init:end,:)),1);6*ones(length(Canal1{2,2}(Init:end,:)),1)];
         
 %figure(7); clf;
 %gscatter(X_train,Y);
@@ -60,19 +60,19 @@ Ysol= [ones(length(DatosEMG{2,1}(Init:end,:)),1) ;  2*ones(length(DatosEMG{2,2}(
 %title('Muestras de Entrenamiento');
 
 %% Crear celdas y vectores para guardar modelos y otras cosas
-ModeloSVM = cell(1,4);
-ModeloVC = cell(1,4);
-errorVC = zeros(1,4);
-asignado = cell(1,4);
-valores = cell(1,4);
+ModeloSVM = cell(1,1);
+ModeloVC = cell(1,1);
+errorVC = zeros(1,1);
+asignado = cell(1,1);
+valores = cell(1,1);
 titulos = {'Kernel Lineal','Kernel Polinomial Grado 2','Kernel Gaussiano, Muestras No Estandarizadas',...
            'Kernel Gaussiano, Muestras Estandarizadas'};
 %% Entrenamiento, variando Kernels y ciertos par�metros
-ModeloSVM{1} = fitcsvm(X_train,Y,'KernelFunction','linear','KernelScale','auto');
-%ModeloSVM{1} = fitcecoc(X_train,Y);
-ModeloSVM{2} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',2);
-ModeloSVM{3} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto');
-ModeloSVM{4} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto','Standardize',true);
+%ModeloSVM{1} = fitcsvm(X_train,Y,'KernelFunction','linear','KernelScale','auto');
+ModeloSVM{1} = fitcecoc(X_train,Y);
+%ModeloSVM{2} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',2);
+%ModeloSVM{3} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto');
+%ModeloSVM{4} = fitcsvm(X_train,Y,'KernelFunction','rbf','KernelScale','auto','Standardize',true);
 
 % Se hace validaci�n cruzada con las muestras de entrenamiento, se calcula el error
 % de clasificaci�n de la validaci�n cruzada, se clasifican las muestras de prueba,
@@ -106,17 +106,13 @@ for k = 1:col
     %sgtitle(sprintf('%s.    Error en la Validaci�n Cruzada: %.2f%%',titulos{k},100*errorVC(k)));
     
 end
-NYsol = full(ind2vec(Ysol',2));
-NAsig1 = full(ind2vec(asignado{1,1}',2))
-NAsig2 = full(ind2vec(asignado{1,2}',2))
-NAsig3 = full(ind2vec(asignado{1,3}',2))
-NAsig4 = full(ind2vec(asignado{1,4}',2))
+NYsol = full(ind2vec(Ysol',6));
+NAsig1 = full(ind2vec(asignado{1,1}',6))
+
 %confusionmat
 %crosstab
 %confusionmat(Ysol,asignado{1,1});
 figure(9); clf;
 
 plotconfusion(NYsol,NAsig1);
-plotconfusion(NYsol,NAsig2);
-plotconfusion(NYsol,NAsig3);
-plotconfusion(NYsol,NAsig4);
+
