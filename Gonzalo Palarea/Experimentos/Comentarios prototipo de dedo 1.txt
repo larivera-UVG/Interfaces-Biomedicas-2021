@@ -1,0 +1,10 @@
+Comentarios Prototipo 1 de dedos
+
+- Algunas uniones son muy frágiles
+- Incrementar diámetro de tornillos y ejes
+- Verificar interferencias por errrores de diseño en dedo_2 y dedo_4
+- Bajar el dedo respecto a la base, la base debería ser como los nudillos. Se le puede dar una inclinación hacia abajo a la palanca que acciona el servo.
+
+Comentarios de Pablo:
+
+Por la altura de la base, la mano no podrá cerrar bien por completo, recomienda bajar el mecanismo de los dedos.
