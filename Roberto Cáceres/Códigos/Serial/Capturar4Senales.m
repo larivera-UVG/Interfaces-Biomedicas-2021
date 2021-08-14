@@ -21,7 +21,7 @@ cont_r = 1;       %Contador no. de muestras anteriores sin mov.
 cont_f = 0;       %Contador no. grabaciones
 grab = 5;        %No. grabaciones
 
-canales = 4;                  %No. canales
+canales = 2;                  %No. canales
 data = zeros(canales,m_m);    %Array para almacenar datos con movimiento
 data_c = zeros(canales,m);    %Array para almacenar datos centrados 
 data_r = zeros(canales,m_r);  %Array para almacenar un tiempo sin mov.
@@ -30,9 +30,8 @@ data_n = [];                  %Array para almacenar datos filtro notch
 
 canal_1 = zeros(grab,m);                   %Almacenar todas las corridas canal 1
 canal_2 = zeros(grab,m);                   %Almacenar todas las corridas canal 2
-canal_3 = zeros(grab,m);                   %Almacenar todas las corridas canal 3
-canal_4 = zeros(grab,m);                   %Almacenar todas las corridas canal 4
-almacenar = zeros(grab,4*m);               %Almacenar canales juntos
+
+almacenar = zeros(grab,2*m);               %Almacenar canales juntos
 
 F_pb = filtro_pasa_banda(srate,20,450);    %Diseñar filtro pasa banda       
 F_notch = filtro_rechaza_banda(srate);     %Diseñar filtro rechaza banda 
@@ -47,22 +46,16 @@ b_act = 0;                                 %Bandera para detectar actividad
 
 %Detalles gráfica
 figure(1); clf;
-subplot(2,2,1);
+subplot(1,2,1);
 h1 = plot(1:m,zeros(1,m));
 xlim([0,m]);
 title('Canal 1');
-subplot(2,2,2);
+subplot(1,2,2);
 h2 = plot(1:m,zeros(1,m));
 xlim([0,m]);
 title('Canal 2');
-subplot(2,2,3);
-h3 = plot(1:m,zeros(1,m));
-xlim([0,m]);
-title('Canal 3');
-subplot(2,2,4);
-h4 = plot(1:m,zeros(1,m));
-xlim([0,m]);
-title('Canal 4');
+
+
 
 th = identificacion2(pserial,t_inicio);    %Identificar el valor del threshold
 
