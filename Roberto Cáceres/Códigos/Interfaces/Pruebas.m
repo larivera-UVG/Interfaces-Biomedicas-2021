@@ -41,26 +41,11 @@ data_n = filter(F_notch, data_f);                       %Aplicar filtro notch
  ylim([min(data_n) max(data_n)]);
 h1.YData = data_n
 
-Data.WaveC5EMG(2) = jEnhancedWaveLength(data_n);
-Data.WaveFormC5EMG(2)= jWaveformLength(data_n);
-Data.MaximumFC5EMG(2) = jMaximumFractalLength(data_n);
-Data.SkewnessFC5EMG(2) = jSkewness(data_n);
-%[year month day hour minute seconds
-
-yfit = TREE_Canal5EMG.predictFcn(Data)
-switch yfit
-    case 'Left'
-        %q2 = [0; deg2rad(60);0; 0;deg2rad(90); 0];
-        
-        %R17fKine(R17, q2);
-        'hola'
-    case 'Forward'
-        %q2 = [0; deg2rad(60);0; deg2rad(45);deg2rad(90); 0];
-        %R17fKine(R17, q2);
-        'hola2'
-    end
 
 
-
+nombres = []
+tel = []
+h = []
+t = table()
         
 
