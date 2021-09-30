@@ -56,7 +56,7 @@ t = Xtarget; % Vectores con los "targets", que identifican a qu� clase pertene
 trainFcn = 'trainscg';  % Scaled conjugate gradient backpropagation.
 
 % Create a Pattern Recognition Network
-hiddenLayerSize = 10;
+hiddenLayerSize = 15;
 net = patternnet(hiddenLayerSize, trainFcn);
 
 % Setup Division of Data for Training, Validation, Testing
