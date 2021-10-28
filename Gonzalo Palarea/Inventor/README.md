@@ -7,6 +7,6 @@
 3. **Utilizar Inventor para navegar los archivos de los modelos individuales de las partes**
 
 ## Impresión 3D
-### Los archivos para impresión 3D se encuentran en la carpeta "stls".
+Los archivos para impresión 3D se encuentran en la carpeta "stls". No utilizar los gcodes contenidos en la carpeta "gcodes/ender5 a menos que la impresora a utilizar sea la ender 5. De igual manera, se recomienda generar gcodes nuevos con los parámetros adecuados para la impresora y filamento a usar.
 
 
