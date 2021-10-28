@@ -42,5 +42,5 @@ En esta carpeta se encuentran los resultados de experimentos realizados.
 ### 1.3 Inventor <a name="inventor"></a>
 En esta carpeta se encuentran los modelos 3D de la mano.
 
-## 1. Créditos <a name="creditos"></a>
+## 2. Créditos <a name="creditos"></a>
 Autor: Gonzalo Palarea A. - pal15559@uvg.edu.gt 
