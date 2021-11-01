@@ -1,7 +1,7 @@
 clear all;
 
 %%  Establecer la longitud de las epocas que se desea e inicializacion de variables
-Epocas_Length = 3; % Duracion en segundos de cada epoca
+Epocas_Length = 2; % Duracion en segundos de cada epoca
 Canales = 8;        % Numero de canales que se desea usar (1 a 8)
 itr = 1;
 t=1:1000;
