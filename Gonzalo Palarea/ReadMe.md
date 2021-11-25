@@ -68,8 +68,12 @@ En esta carpeta se encuentran los modelos 3D de la mano.
   <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensorpulgar.jpeg" width="350" title="hover text">
 </p>
 5. Encender el prototipo con el switch ubicado en la tapadera.
+
+
 6. Esperar 5 segundos, con los músculos relajados, para que los sensores se ajusten.
+
 7. Puede comenzar a utilizar el prototipo.
+
 8. En caso de que la mano comenzara a realizar movimientos no deseados, apagar el switch de la tapa y hacer el procedimiento desde el paso 5 para volver a calibrar los sensores. 
 
 
