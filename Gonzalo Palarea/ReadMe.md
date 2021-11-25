@@ -67,6 +67,7 @@ En esta carpeta se encuentran los modelos 3D de la mano.
 <p align="center">
   <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensorpulgar.jpeg" width="350" title="hover text">
 </p>
+
 5. Encender el prototipo con el switch ubicado en la tapadera.
 
 
