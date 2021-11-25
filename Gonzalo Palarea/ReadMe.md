@@ -10,7 +10,10 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
   * Fuente de energía portátil y recargable.
   * Partes fácilmente reemplazables
 
-![alt text](https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/ptototipo2/palma.JPG "Logo Title Text 1")
+<p align="center">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/ptototipo2/palma.JPG" width="600" title="hover text">
+</p>
+
 
 ## Índice
 
