@@ -1,0 +1,32 @@
+
+
+
+---------------->Comandos HC-05<----------------------------
+AT
+AT  	         		Verifica la conexion y responde OK
+AT+NAME=(NUEVO NOMBRE...)  	Cambiar nombre
+AT+NAME				Ver nombre del modulo
+AT+ADDR		     		Ver direccion del bluetooth (M.A.C address)
+AT+VERSION	     		Ver version de bluetooth
+AT+UART  			Ver baudios a los que esta configurado
+AT+UART=9600,0,0		Cambia los baudios a trabajar
+AT+ROLE= 			Configura como esclavo con 0 y como maestro con un 1
+AT+ROLE				Ver si es esclavo o maestro
+AT+RESET  			Se reinicia y sale de el modo configuracion AT
+AT+ORGL 			Restable su configuracion de fabrica
+AT+PSWD=5678	   		cambiar contraseña con 4 numeros max.
+AT+PSWD				Ver el passwoed del modulo
+
+------>BAUDIOS A LOS QUE TRABAJA EL HC-05/06<----------------
+1---------1200
+2---------2400
+3---------4800
+4---------9600 (Default)
+5---------19200
+6---------38400
+7---------57600
+8---------115200
+9---------230400
+A---------460800
+B---------921600
+C---------1382400 

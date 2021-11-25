@@ -36,8 +36,8 @@ function fK = R17fKine(R17Obj, q)
         pause(3);
     end
     
-    R17Command(R17Obj, "CARTESIAN");
-    R17Command(R17Obj, "WHERE");
+    R17Command(R17Obj, "CARTESIAN");%pelle
+    R17Command(R17Obj, "WHERE");%pelle
     %R17Command(R17Obj, "COMPUTE CARTWHERE"); % alternative option
 
     temps = char(R17Obj.UserData.responseHistory(end-2));

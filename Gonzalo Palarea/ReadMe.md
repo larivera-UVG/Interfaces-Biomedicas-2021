@@ -1,10 +1,46 @@
-Las carpetas contienen lo siguiente:
+# Diseño y Fabricación de una Prótesis Electromecánica de Mano Humana, Controlada por Señales EMG de Superficie
 
-Documentos: contiene los borradores del protocolo, tesis y las imagenes utilizadas para los documentos
-Inventor: contiene los modelos 3D de la mano prostética.
-Papers: Contiene archivos leídos para investigación.
+Autor: Gonzalo Palarea A. - pal15559@uvg.edu.gt 
 
-Los .txt contienen:
+Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano humana, controlada por señales EMG de superficie. Las características principales de la mano son:
 
-Links: Vínculos a páginas útiles, como tutoriales o videos.
-Temas de Investigación: Lluvia de ideas de cosas a investigar.
+  * Accesible económicamente. La mayoría de piezas se pueden fabricar por medio de impresión 3D FDM.
+  * Utiliza señales EMG de superficie para interpretar los movimientos deseados del usuario.
+  * Replica movimientos simples.
+  * Fuente de energía portátil y recargable.
+  * Partes fácilmente reemplazables
+
+![alt text](https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/ptototipo2/palma.JPG "Logo Title Text 1")
+
+## Índice
+
+**[1. Estructura de Carpetas](#carpetas)**
+  * [1.1 Documentos](#documentos)
+  * [1.2 Experimentos](#experimentos)
+  * [1.3 Inventor](#inventor)
+  
+
+**[2. Créditos](#creditos)**
+
+
+## 1. Estructura de Carpetas <a name="carpetas"></a>
+A continuación se presenta la estructura y contenido de las carpetas de este repositorio.
+
+### 1.1 Documentos <a name="documentos"></a>
+En esta carpeta se encuentran las siguientes carpetas:
+
+1. **Borradores Protocolos**
+2. **Borradores Tesis**
+3. **Datasheets**
+4. **Documentos Tesis Gonzalo Palarea**
+5. **Material de investigación**
+
+
+### 1.2 Experimentos <a name="experimentos"></a>
+En esta carpeta se encuentran los resultados de experimentos realizados.
+
+### 1.3 Inventor <a name="inventor"></a>
+En esta carpeta se encuentran los modelos 3D de la mano.
+
+## 2. Créditos <a name="creditos"></a>
+Autor: Gonzalo Palarea A. - pal15559@uvg.edu.gt 
