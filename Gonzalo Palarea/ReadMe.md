@@ -24,30 +24,8 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
   * [1.4 Inventor](#inventor)
   
 **[2. Instrucciones de uso](#instrucciones)**
-1. Colocar una batería 18650 cargada en el portabaterías poniendo atención a los polos. El polo negativo (la punta plana de la batería) va hacia el resorte del portabaterías
-2. Colocar uno de los sensores Myoware en el músculo extensor de los dedos, como en la imagen a continuación
-<p align="center">
-  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensor.jpeg" width="350" title="hover text">
-</p>
 
-3. Colocar otro sensor Myoware en el músculo flexor de los dedos, como en la imagen a continuación
-<p align="center">
-  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresflexor.jpeg" width="350" title="hover text">
-</p>
-4. Colocar el último sensor Myoware en el músculo extensor del pulgar, como en la imagen a continuación
-<p align="center">
-  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensorpulgar.jpeg" width="350" title="hover text">
-</p>
-5. Encender el prototipo con el switch ubicado en la tapadera.
-6. Esperar 5 segundos, con los músculos relajados, para que los sensores se ajusten.
-7. Puede comenzar a utilizar el prototipo.
-8. En caso de que la mano comenzara a realizar movimientos no deseados, apagar el switch de la tapa y hacer el procedimiento desde el paso 5 para volver a calibrar los sensores. 
-
-
-
-
-
-**[4. Créditos](#creditos)**
+**[3. Créditos](#creditos)**
 
 
 ## 1. Estructura de Carpetas <a name="carpetas"></a>
@@ -74,5 +52,26 @@ En esta carpeta se encuentran los resultados de experimentos realizados.
 ### 1.4 Inventor <a name="inventor"></a>
 En esta carpeta se encuentran los modelos 3D de la mano.
 
-## 2. Créditos <a name="creditos"></a>
+## 2. Instrucciones de uso <a name="instrucciones"></a>
+1. Colocar una batería 18650 cargada en el portabaterías poniendo atención a los polos. El polo negativo (la punta plana de la batería) va hacia el resorte del portabaterías
+2. Colocar uno de los sensores Myoware en el músculo extensor de los dedos, como en la imagen a continuación
+<p align="center">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensor.jpeg" width="350" title="hover text">
+</p>
+
+3. Colocar otro sensor Myoware en el músculo flexor de los dedos, como en la imagen a continuación
+<p align="center">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresflexor.jpeg" width="350" title="hover text">
+</p>
+4. Colocar el último sensor Myoware en el músculo extensor del pulgar, como en la imagen a continuación
+<p align="center">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensorpulgar.jpeg" width="350" title="hover text">
+</p>
+5. Encender el prototipo con el switch ubicado en la tapadera.
+6. Esperar 5 segundos, con los músculos relajados, para que los sensores se ajusten.
+7. Puede comenzar a utilizar el prototipo.
+8. En caso de que la mano comenzara a realizar movimientos no deseados, apagar el switch de la tapa y hacer el procedimiento desde el paso 5 para volver a calibrar los sensores. 
+
+
+## 3. Créditos <a name="creditos"></a>
 Autor: Gonzalo Palarea A. - pal15559@uvg.edu.gt 
