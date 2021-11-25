@@ -15,9 +15,10 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
 ## Índice
 
 **[1. Estructura de Carpetas](#carpetas)**
-  * [1.1 Documentos](#documentos)
-  * [1.2 Experimentos](#experimentos)
-  * [1.3 Inventor](#inventor)
+  * [1.1 Code](#code)
+  * [1.2 Documentos](#documentos)
+  * [1.3 Experimentos](#experimentos)
+  * [1.4 Inventor](#inventor)
   
 
 **[2. Créditos](#creditos)**
@@ -26,7 +27,12 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
 ## 1. Estructura de Carpetas <a name="carpetas"></a>
 A continuación se presenta la estructura y contenido de las carpetas de este repositorio.
 
-### 1.1 Documentos <a name="documentos"></a>
+### 1.1 Code <a name="documentos"></a>
+En esta carpeta se encuentran los siguientes archivos:
+1. **Hoja de cálculo de interrupts que fue utilizada para calcular el período de muestreo utilizando el timer 2 del arduino nano**
+2. **Carpeta "Code" que contiene el programa .ino utilizado en el prototipo**
+
+### 1.2 Documentos <a name="documentos"></a>
 En esta carpeta se encuentran las siguientes carpetas:
 
 1. **Borradores Protocolos**
@@ -36,10 +42,10 @@ En esta carpeta se encuentran las siguientes carpetas:
 5. **Material de investigación**
 
 
-### 1.2 Experimentos <a name="experimentos"></a>
+### 1.3 Experimentos <a name="experimentos"></a>
 En esta carpeta se encuentran los resultados de experimentos realizados.
 
-### 1.3 Inventor <a name="inventor"></a>
+### 1.4 Inventor <a name="inventor"></a>
 En esta carpeta se encuentran los modelos 3D de la mano.
 
 ## 2. Créditos <a name="creditos"></a>
