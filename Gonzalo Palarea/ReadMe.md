@@ -11,7 +11,7 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
   * Partes fácilmente reemplazables
 
 <p align="center">
-  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/ptototipo2/palma.JPG" width="600" title="hover text">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/ptototipo2/palma.JPG" width="800" title="hover text">
 </p>
 
 
@@ -23,7 +23,7 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
   * [1.3 Experimentos](#experimentos)
   * [1.4 Inventor](#inventor)
   
-**[2. Instrucciones de uso](#creditos)**
+**[2. Instrucciones de uso](#instrucciones)**
 1. **Colocar una batería 18650 cargada en el portabaterías poniendo atención a los polos. El polo negativo (la punta plana de la batería) va hacia el resorte del portabaterías**
 2. **Colocar uno de los sensores Myoware en el músculo extensor de los dedos, como en la imagen a continuación** 
 <p align="center">
@@ -42,7 +42,7 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
 
 
 
-**[3. Créditos](#creditos)**
+**[4. Créditos](#creditos)**
 
 
 ## 1. Estructura de Carpetas <a name="carpetas"></a>
