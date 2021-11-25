@@ -22,8 +22,10 @@ Este proyecto tiene como fin el desarrollo de un prototipo de próstesis de mano
   
 **[2. Instrucciones de uso](#creditos)**
 1. **Colocar una batería 18650 cargada en el portabaterías poniendo atención a los polos. El polo negativo (la punta plana de la batería) va hacia el resorte del portabaterías**
-2. **Colocar un sensor Myoware en el músculo extensor de los dedos, como en la imagen a continuación** ![alt text](https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensor.jpeg "width="200"")
-
+2. **Colocar un sensor Myoware en el músculo extensor de los dedos, como en la imagen a continuación** 
+<p align="center">
+  <img src="https://github.com/larivera-UVG/Interfaces-Biomedicas-2021/blob/main/Gonzalo%20Palarea/Documentos/imagenes%20Overleaf/emg/sensoresextensor.jpeg" width="350" title="hover text">
+</p>
 
 
 **[3. Créditos](#creditos)**
