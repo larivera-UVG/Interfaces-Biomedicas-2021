@@ -19,8 +19,8 @@ clc; close all; clear all;
 %%
 % Directory
 % Write down where converted data file downloaded (file directory)
-dd='C:\Users\barss\OneDrive\Desktop\ReachingSub2EMG\'; 
-cd 'C:\Users\barss\OneDrive\Desktop\ReachingSub2EMG';
+dd='C:\Users\barss\OneDrive\Documents\GitHub\Interfaces-Biomedicas-2021\Roberto Cáceres\Códigos\Base de datos Pública\Extracción de características Base de datos\'; 
+cd 'C:\Users\barss\OneDrive\Documents\GitHub\Interfaces-Biomedicas-2021\Roberto Cáceres\Códigos\Base de datos Pública\Extracción de características Base de datos';
 % Example: dd='Downlad_folder\SampleData\plotScalp\';
 
 datedir = dir('*.mat');
@@ -131,7 +131,8 @@ for i = 1:length(filelist)
         epo=cntToEpo(cnt,mrk,ival);
         
         % Select channels
-        epo = proc_selectChannels(epo, {'EMG_1','EMG_2'});
+      %  epo = proc_selectChannels(epo, {'EMG_1','EMG_2'});
+      epo = proc_selectChannels(epo, {'AF3'});
         
         classes=size(epo.className,2);
         
@@ -253,7 +254,7 @@ DatosEMGCanal1{2,18}=  XtestWaveForm6;
   
 
 
-if concatEpo.x(:,2,:)
+if concatEpo.x(:,1,:)
           for j = 1:nTrials
             
     

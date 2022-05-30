@@ -24,18 +24,23 @@
 % 83 % obtenido de resultado de validacion
 
 %% Zero Crossing, MAV, VARIANZA, Wav,  WilsonAmplitude,  Skewness, IntegratedEMG 
-X_input = [Canal1EEG{2,3}, Canal1EEG{2,9},Canal1EEG{2,13},Canal1EEG{2,15},Canal1EEG{2,17},Canal1EMG{2,1},Canal1EMG{2,3}, Canal1EMG{2,9},Canal1EMG{2,15},Canal1EMG{2,17},Canal2EEG{2,3}, Canal2EEG{2,9},Canal2EEG{2,13},Canal2EEG{2,15},Canal2EEG{2,17},Canal2EMG{2,1},Canal2EMG{2,3}, Canal2EMG{2,9},Canal2EMG{2,15},Canal2EMG{2,17}; Canal1EEG{2,4},Canal1EEG{2,10},Canal1EEG{2,14},Canal1EEG{2,16},Canal1EEG{2,18},Canal1EMG{2,2},Canal1EMG{2,4}, Canal1EMG{2,10},Canal1EMG{2,16},Canal1EMG{2,18},Canal2EEG{2,4},Canal2EEG{2,10},Canal2EEG{2,14},Canal2EEG{2,16},Canal2EEG{2,18},Canal2EMG{2,2},Canal2EMG{2,4}, Canal2EMG{2,10},Canal2EMG{2,16},Canal2EMG{2,18}]';
-
+%X_input = [Canal1EEG{2,3}, Canal1EEG{2,9},Canal1EEG{2,13},Canal1EEG{2,15},Canal1EEG{2,17},Canal1EMG{2,1},Canal1EMG{2,3}, Canal1EMG{2,9},Canal1EMG{2,15},Canal1EMG{2,17},Canal2EEG{2,3}, Canal2EEG{2,9},Canal2EEG{2,13},Canal2EEG{2,15},Canal2EEG{2,17},Canal2EMG{2,1},Canal2EMG{2,3}, Canal2EMG{2,9},Canal2EMG{2,15},Canal2EMG{2,17}; Canal1EEG{2,4},Canal1EEG{2,10},Canal1EEG{2,14},Canal1EEG{2,16},Canal1EEG{2,18},Canal1EMG{2,2},Canal1EMG{2,4}, Canal1EMG{2,10},Canal1EMG{2,16},Canal1EMG{2,18},Canal2EEG{2,4},Canal2EEG{2,10},Canal2EEG{2,14},Canal2EEG{2,16},Canal2EEG{2,18},Canal2EMG{2,2},Canal2EMG{2,4}, Canal2EMG{2,10},Canal2EMG{2,16},Canal2EMG{2,18}]';
+X_input=[Data(:,1:8)]'
 %%  RMS, WAVELET 
 
 %X_input = [ DatosEMG{2,5}, DatosEMG{2,7}; DatosEMG{2,6},DatosEMG{2,8}]';
  
 
 
-Xtarget = [ones(length(Canal1EMG{2,1}),1),zeros(length(Canal1EMG{2,1}),1);
-           zeros(length(Canal1EMG{2,2}),1),ones(length(Canal1EMG{2,2}),1)]';
+%Xtarget = [ones(length(Canal1EMG{2,1}),1),zeros(length(Canal1EMG{2,1}),1);
+   %        zeros(length(Canal1EMG{2,2}),1),ones(length(Canal1EMG{2,2}),1)]';
     
-
+   Xtarget = [ones(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1);
+          zeros(length(Data(1:1250,1)),1),ones(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1);
+          zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),ones(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1);
+          zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),zeros(length(Data(1:1250,1)),1),ones(length(Data(1:1250,1)),1)]';
+    
+%ones(length(Data{1:1250,1}),1)
 
 
 

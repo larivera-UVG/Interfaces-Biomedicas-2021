@@ -1,15 +1,15 @@
-%Roberto Caceres - 17163
+  %Roberto Caceres - 17163
 %2021
 %Este codigo implementa 6 SVM con diferentes tipos de nucleo. Se encuentran comentadas las opciones
 %para aplicar SVM a diferentes combinaciones de caracteristicas, pero el mejor resultado se obtuvo
 %con las 4 caracteristicas.
 
 %% SVM
-for ii=1:length(DatosEMG{2,2})
-   if (DatosEMG{2,2}(ii) == 2) 
-       DatosEMG{2,2}(ii) = 0;
-   end
-end
+% for ii=1:length(DatosEMG{2,2})
+%    if (DatosEMG{2,2}(ii) == 2) 
+%        DatosEMG{2,2}(ii) = 0;
+%    end
+% end
 
 %MAV y ZC
 % X_train = [data{2,3}(1:20,:), data{2,5}(1:20,:);
@@ -33,26 +33,24 @@ end
 %            data{2,8}(21:end,:), data{2,10}(21:end,:)];
 
 %Todas juntas
-Limit = 420;
+Limit = 1000;
 Init = Limit+1;
 %X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:),data2{2,1}(1:30,:),data2{2,3}(1:30,:),data2{2,5}(1:30,:),data2{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:),data2{2,2}(1:30,:),data2{2,4}(1:30,:),data2{2,6}(1:30,:),data2{2,8}(1:30,:)];
 % X_train = [data{2,1}(1:30,:), data{2,3}(1:30,:), data{2,5}(1:30,:), data{2,7}(1:30,:); data{2,2}(1:30,:), data{2,4}(1:30,:), data{2,6}(1:30,:), data{2,8}(1:30,:)];       
-X_train = [ DatosEMG{2,1}(1:Limit,:),DatosEMG{2,3}(1:Limit,:), DatosEMG{2,9}(1:Limit,:),DatosEMG{2,15}(1:Limit,:),DatosEMG{2,17}(1:Limit,:); DatosEMG{2,2}(1:Limit,:),DatosEMG{2,4}(1:Limit,:), DatosEMG{2,10}(1:Limit,:),DatosEMG{2,16}(1:Limit,:),DatosEMG{2,18}(1:Limit,:)];
-
+X_train = [ Datos(1:Limit,1:8);Datos(1251:2250,1:8);Datos(2501:3500,1:8);Datos(3751:4750,1:8)]
 %Xtarget = [ones(length(data{2,1}(1:30,:)),1);  2*ones(length(data{2,2}(1:30,:)),1)];
 
-Xtarget = [ones(length(DatosEMG{2,1}(1:Limit,:)),1);  2*ones(length(DatosEMG{2,2}(1:Limit,:)),1)];
+Xtarget = [ones(length(Datos(1:Limit,:)),1);  2*ones(length(Datos(1:Limit,:)),1);  3*ones(length(Datos(1:Limit,:)),1);  4*ones(length(Datos(1:Limit,:)),1)];
 
 Y= Xtarget ;
 
-X_test = [ DatosEMG{2,1}(Init:end,:),DatosEMG{2,3}(Init:end,:), DatosEMG{2,9}(Init:end,:), DatosEMG{2,15}(Init:end,:),DatosEMG{2,17}(Init:end,:); DatosEMG{2,2}(Init:end,:),DatosEMG{2,4}(Init:end,:), DatosEMG{2,10}(Init:end,:), DatosEMG{2,16}(Init:end,:),DatosEMG{2,18}(Init:end,:)];
-
+X_test = [Datos(1001:1250,1:8);Datos(2251:2500,1:8);Datos(3501:3750,1:8);Datos(4751:5000,1:8) ]
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:),data2{2,1}(31:50,:),data2{2,3}(31:50,:),data2{2,5}(31:50,:),data2{2,7}(31:50,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:),data2{2,2}(31:50,:),data2{2,4}(31:50,:),data2{2,6}(31:50,:),data2{2,8}(31:50,:)];
  
 %X_test = [data{2,1}(31:end,:), data{2,3}(31:end,:), data{2,5}(31:end,:), data{2,7}(31:end,:); data{2,2}(31:end,:), data{2,4}(31:end,:), data{2,6}(31:end,:), data{2,8}(31:end,:)];      
  %--------------------------------------       
 %Ysol= [ones(length(data{2,1}(31:end,:)),1);  2*ones(length(data{2,2}(31:end,:)),1)];
-Ysol= [ones(length(DatosEMG{2,1}(Init:end,:)),1) ;  2*ones(length(DatosEMG{2,2}(Init:end,:)),1)];
+Ysol= [ones(length(Datos(1001:1250,1:8)),1) ;  2*ones(length(Datos(1001:1250,1:8)),1);  3*ones(length(Datos(1001:1250,1:8)),1);  4*ones(length(Datos(1001:1250,1:8)),1)];
         
 %figure(7); clf;
 %gscatter(X_train,Y);
@@ -67,7 +65,7 @@ asignado = cell(1,4);
 valores = cell(1,4);
 titulos = {'Kernel Lineal','Kernel Polinomial Grado 2','Kernel Gaussiano, Muestras No Estandarizadas',...
            'Kernel Gaussiano, Muestras Estandarizadas'};
-%% Entrenamiento, variando Kernels y ciertos par�metros
+%% Entrenamiento, variando Kernels y ciertos parametros
 ModeloSVM{1} = fitcsvm(X_train,Y,'KernelFunction','linear','KernelScale','auto');
 %ModeloSVM{1} = fitcecoc(X_train,Y);
 ModeloSVM{2} = fitcsvm(X_train,Y,'KernelFunction','polynomial','KernelScale','auto','PolynomialOrder',2);
